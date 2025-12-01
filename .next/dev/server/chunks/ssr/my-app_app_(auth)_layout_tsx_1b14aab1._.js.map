@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///Users/vitaliylevdansky/Desktop/PROGRAMMING/prog/my-app-router/my-app/app/%28auth%29/layout.tsx"],"sourcesContent":["import Link from 'next/link'\n\nexport default function RootLayout({\n  children,\n}: Readonly<{\n  children: React.ReactNode\n}>) {\n  return (\n    <>\n      <header>\n        <nav className=\"text-2xl font-bold flex gap-4\">\n          <Link href=\"/\">Home</Link>\n          <span>About</span>\n          <span>Contact</span>\n        </nav>\n      </header>\n      {children}\n    </>\n  )\n}\n"],"names":[],"mappings":";;;;;AAAA;;;AAEe,SAAS,WAAW,EACjC,QAAQ,EAGR;IACA,qBACE;;0BACE,2PAAC;0BACC,cAAA,2PAAC;oBAAI,WAAU;;sCACb,2PAAC,uMAAI;4BAAC,MAAK;sCAAI;;;;;;sCACf,2PAAC;sCAAK;;;;;;sCACN,2PAAC;sCAAK;;;;;;;;;;;;;;;;;YAGT;;;AAGP","debugId":null}}]
+}

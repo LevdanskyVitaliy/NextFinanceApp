@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 22, "column": 0}, "map": {"version":3,"sources":["file:///Users/vitaliylevdansky/Desktop/PROGRAMMING/prog/my-app-router/my-app/app/statistics/page.tsx"],"sourcesContent":["import Link from 'next/link'\nimport AmountsTable from './components/Amounts'\n\nexport default function Home() {\n  return (\n    <div>\n     <main className=\" mt-10\">\n        \n     <p className='text-2xl p-5 '>This is STATISTICS page</p>\n     <AmountsTable/>\n     </main>\n    </div>\n\n  )\n}\n"],"names":[],"mappings":";;;;;;;;;;;;AAGe,SAAS;IACtB,qBACE,2PAAC;kBACA,cAAA,2PAAC;YAAK,WAAU;;8BAEhB,2PAAC;oBAAE,WAAU;8BAAgB;;;;;;8BAC7B,2PAAC;;;;;;;;;;;;;;;;AAKN","debugId":null}}]
+}

@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 18, "column": 0}, "map": {"version":3,"sources":["file:///Users/vitaliylevdansky/Desktop/PROGRAMMING/prog/my-app-router/my-app/app/page.tsx"],"sourcesContent":["import Link from 'next/link'\n\nexport default function Home() {\n  return (\n    <div className=\"flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black\">\n      <main className=\"\">\n        Hi! Go to\n        <Link className=\"text-blue-500\" href=\"/users\">\n          Users\n        </Link>\n      </main>\n    </div>\n  )\n}"],"names":[],"mappings":";;;;;AAAA;;;AAEe,SAAS;IACtB,qBACE,2PAAC;QAAI,WAAU;kBACb,cAAA,2PAAC;YAAK,WAAU;;gBAAG;8BAEjB,2PAAC,uMAAI;oBAAC,WAAU;oBAAgB,MAAK;8BAAS;;;;;;;;;;;;;;;;;AAMtD","debugId":null}}]
+}

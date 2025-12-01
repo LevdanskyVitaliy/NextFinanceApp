@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 22, "column": 0}, "map": {"version":3,"sources":["file:///Users/vitaliylevdansky/Desktop/PROGRAMMING/prog/my-app-router/my-app/app/page.tsx"],"sourcesContent":["import Link from 'next/link'\nimport Header from './components/Header'\n\nexport default function Home() {\n  return (\n    <div className=\"flex min-h-screen items-center justify-center dark:bg-[#013220] bg-[#A8DCAB text-gray-800 font-sans bg-dollar-pattern\">\n\n    <Header />\n    \n  \n      <main className=\"text-black text-xl font-bold\">\n        Hi! Go to\n        <Link className=\"text-blue-500\" href=\"/users\">\n          Users\n        </Link>\n      </main>\n    </div>\n  )\n}"],"names":[],"mappings":";AAAA,OAAO,UAAU,YAAW;AAC5B,OAAO,YAAY,sBAAqB;AAExC,eAAe,SAAS;IACtB,qBACE,QAAC;QAAI,WAAU;;0BAEf,QAAC;;;;;0BAGC,QAAC;gBAAK,WAAU;;oBAA+B;kCAE7C,QAAC;wBAAK,WAAU;wBAAgB,MAAK;kCAAS;;;;;;;;;;;;;;;;;;AAMtD","debugId":null}}]
+}
