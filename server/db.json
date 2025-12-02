@@ -1,0 +1,206 @@
+{
+  "transactions": [
+    {
+      "id": "2efb",
+      "amount": 100,
+      "category": "6",
+      "date": "2025-10-30T00:00:00.000Z",
+      "description": "NewNENWNWNW",
+      "type": "expense"
+    },
+    {
+      "id": "f3dd",
+      "amount": 0,
+      "category": "",
+      "description": "sdgwrg",
+      "type": "expense",
+      "date": "2025-11-03T00:00:00.000Z"
+    },
+    {
+      "id": "a8d6",
+      "amount": 99,
+      "category": "2",
+      "description": "stipa dva",
+      "type": "income",
+      "date": "2025-11-09T00:00:00.000Z"
+    },
+    {
+      "id": "e609",
+      "amount": 10,
+      "category": "",
+      "description": "sesfefafe",
+      "type": "income",
+      "date": "2025-11-09T00:00:00.000Z"
+    },
+    {
+      "id": "6952",
+      "amount": 10,
+      "category": "",
+      "description": "esdwrg",
+      "type": "expense",
+      "date": "2025-11-09T00:00:00.000Z"
+    },
+    {
+      "id": "4adb",
+      "amount": 100,
+      "category": "5",
+      "description": "freelansfs sdsfsf",
+      "type": "expense",
+      "date": "2025-11-09T00:00:00.000Z"
+    },
+    {
+      "id": "a027",
+      "amount": 0,
+      "category": "3",
+      "description": "oiio",
+      "type": "income",
+      "date": "2025-11-09T00:00:00.000Z"
+    },
+    {
+      "id": "6b9b",
+      "amount": 240,
+      "category": "9",
+      "description": "stipaaa",
+      "type": "income",
+      "date": "2025-11-12T00:00:00.000Z"
+    },
+    {
+      "id": "fe90",
+      "amount": 100,
+      "category": "9",
+      "description": "0000",
+      "type": "expense",
+      "date": "2025-11-12T00:00:00.000Z"
+    },
+    {
+      "id": "9507",
+      "amount": 10,
+      "category": "9",
+      "description": "NENWNWNWNWNWNWOLD",
+      "type": "income",
+      "date": "2025-11-06T00:00:00.000Z"
+    },
+    {
+      "id": "fb5c",
+      "amount": 10,
+      "category": "9",
+      "description": "fjferji",
+      "type": "income",
+      "date": "2025-11-15T00:00:00.000Z"
+    },
+    {
+      "id": "e5db",
+      "amount": 100,
+      "category": "10",
+      "description": "10000",
+      "type": "income",
+      "date": "2025-11-17T00:00:00.000Z"
+    },
+    {
+      "id": "d805",
+      "amount": 2000,
+      "category": "8",
+      "description": "Transport expences",
+      "type": "expense",
+      "date": "2025-11-17T00:00:00.000Z"
+    },
+    {
+      "id": "9578",
+      "amount": 10,
+      "category": "1",
+      "description": "uh",
+      "type": "expense",
+      "date": "2025-11-17T00:00:00.000Z"
+    },
+    {
+      "id": "c84f",
+      "amount": 240,
+      "category": "9",
+      "description": "Stipa",
+      "type": "income",
+      "date": "2025-11-17T00:00:00.000Z"
+    },
+    {
+      "id": "eafd",
+      "amount": 100,
+      "category": "3",
+      "description": "Type",
+      "type": "income",
+      "date": "2025-11-26T00:00:00.000Z"
+    },
+    {
+      "id": "25c2",
+      "amount": 1000,
+      "category": "9",
+      "description": "Iononoh",
+      "type": "income",
+      "date": "2025-11-27T00:00:00.000Z"
+    },
+    {
+      "id": "c616",
+      "amount": 1000,
+      "category": "1",
+      "description": "ewifhwef",
+      "type": "expense",
+      "date": "2025-11-20T00:00:00.000Z"
+    },
+    {
+      "id": "494a",
+      "amount": 1000,
+      "category": "8",
+      "description": "0eq23iroh",
+      "type": "income",
+      "date": "2025-11-29T00:00:00.000Z"
+    },
+    {
+      "id": "50d7",
+      "amount": 100000,
+      "category": "1",
+      "description": "regherogh",
+      "type": "income",
+      "date": "2025-11-30T00:00:00.000Z"
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "name": "Инвестиции"
+    },
+    {
+      "id": "2",
+      "name": "Подарки"
+    },
+    {
+      "id": "3",
+      "name": "Здоровье"
+    },
+    {
+      "id": "4",
+      "name": "Одежда"
+    },
+    {
+      "id": "5",
+      "name": "Фриланс"
+    },
+    {
+      "id": "6",
+      "name": "Коммунальные услуги"
+    },
+    {
+      "id": "7",
+      "name": "Развлечения"
+    },
+    {
+      "id": "8",
+      "name": "Транспорт"
+    },
+    {
+      "id": "9",
+      "name": "Зарплата"
+    },
+    {
+      "id": "10",
+      "name": "Еда и напитки"
+    }
+  ]
+}

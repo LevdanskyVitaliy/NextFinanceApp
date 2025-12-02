@@ -1,2 +1,17 @@
-[00:00:03.917] Server  LOG      ✓ Ready in 2.9s
-[00:00:11.290] Server  LOG      ○ Compiling / ...
+[00:00:06.835] Server  LOG      ✓ Ready in 5.9s
+[00:00:09.877] Server  LOG      ○ Compiling / ...
+[00:01:42.978] Server  LOG      ✓ Compiled in 541ms
+[00:02:13.321] Server  LOG      ✓ Compiled in 142ms
+[00:02:13.327] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:02:19.921] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:02:19.934] Server  LOG      ✓ Compiled in 140ms
+[00:02:25.122] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:02:25.150] Server  LOG      ✓ Compiled in 173ms
+[00:02:30.609] Server  LOG      ✓ Compiled in 115ms
+[00:02:30.610] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:02:36.265] Server  LOG      ✓ Compiled in 121ms
+[00:02:36.283] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:02:42.275] Server  LOG      ✓ Compiled in 98ms
+[00:02:42.282] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:02:49.227] Server  LOG      ✓ Compiled in 559ms
+[00:02:49.229] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
