@@ -26,11 +26,12 @@ __turbopack_context__.s([
  * - Vercel: fetch("https://yourapp.vercel.app/transactions") → Next route handler
  */ class Api {
     // Old hard-coded approach (commented out for reference):
-    // #baseURL = "http://localhost:3000";
+    #baseURL = "http://localhost:3000";
     // New dynamic approach: works everywhere!
     // - Server-side: "" (empty string = relative URL from server)
     // - Client-side: window.location.origin (current domain)
-    #baseURL = ("TURBOPACK compile-time falsy", 0) ? "TURBOPACK unreachable" : window.location.origin ?? "";
+    // #baseURL =
+    //   typeof window === "undefined" ? "" : window.location.origin ?? "";
     // Cache for categories since they rarely change
     // Prevents unnecessary API calls
     #categoriesCache = null;

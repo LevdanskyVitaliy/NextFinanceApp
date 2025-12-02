@@ -1,17 +1,17 @@
-[00:00:06.835] Server  LOG      ✓ Ready in 5.9s
-[00:00:09.877] Server  LOG      ○ Compiling / ...
-[00:01:42.978] Server  LOG      ✓ Compiled in 541ms
-[00:02:13.321] Server  LOG      ✓ Compiled in 142ms
-[00:02:13.327] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
-[00:02:19.921] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
-[00:02:19.934] Server  LOG      ✓ Compiled in 140ms
-[00:02:25.122] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
-[00:02:25.150] Server  LOG      ✓ Compiled in 173ms
-[00:02:30.609] Server  LOG      ✓ Compiled in 115ms
-[00:02:30.610] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
-[00:02:36.265] Server  LOG      ✓ Compiled in 121ms
-[00:02:36.283] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
-[00:02:42.275] Server  LOG      ✓ Compiled in 98ms
-[00:02:42.282] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
-[00:02:49.227] Server  LOG      ✓ Compiled in 559ms
-[00:02:49.229] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:00:05.763] Server  LOG      ✓ Ready in 4.7s
+[00:00:13.698] Server  LOG      ○ Compiling / ...
+[00:00:44.467] Server  LOG      ○ Compiling /statistics ...
+[00:00:50.534] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:00:50.534] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+[00:00:50.534] Browser WARN    WARNING: Invalid layout total size: 70%, 20%. Layout normalization will be applied.
+[00:00:50.534] Browser WARN    WARNING: Invalid layout total size: 35%, 70%. Layout normalization will be applied.
+[00:00:50.534] Browser WARN    WARNING: Invalid layout total size: 70%, 20%. Layout normalization will be applied.
+[00:00:50.534] Browser WARN    WARNING: Invalid layout total size: 35%, 70%. Layout normalization will be applied.
+[00:01:29.655] Browser LOG     Fetching transaction with ID: 25c2
+[00:01:29.989] Browser LOG     Transaction found: {"amount":1000,"category":"9","date":"2025-11-27","description":"Iononoh","id":"25c2","type":"income"}
