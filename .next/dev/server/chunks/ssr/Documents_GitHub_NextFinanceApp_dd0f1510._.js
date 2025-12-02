@@ -423,6 +423,216 @@ function TabsContent({ className, ...props }) {
 "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx [app-ssr] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
+// "use client";
+// import { useState } from "react";
+// import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+// import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+// import { TrendingUp, TrendingDown } from "lucide-react";
+// import { useTransactions } from "../contexts/TransactionContext";
+// import {
+//   PieChart,
+//   Pie,
+//   Cell,
+//   ResponsiveContainer,
+//   Tooltip
+// } from "recharts";
+// interface CategoryData {
+//   name: string;
+//   value: number;
+//   percentage: number;
+//   color: string;
+// }
+// const CATEGORY_COLORS = [
+//   "#3B82F6",
+//   "#EF4444",
+//   "#10B981",
+//   "#F59E0B",
+//   "#8B5CF6",
+//   "#EC4899",
+//   "#06B6D4",
+//   "#84CC16",
+//   "#F97316",
+//   "#6366F1",
+//   "#14B8A6",
+//   "#F43F5E",
+//   "#8B5CF6",
+//   "#EC4899",
+//   "#06B6D4",
+// ];
+// const CustomTooltip = ({ active, payload }: any) => {
+//   if (active && payload && payload.length) {
+//     const data = payload[0].payload;
+//     return (
+//       <div className="bg-white dark:bg-gray-800 p-3 border border-gray-200 dark:border-gray-700  rounded-lg shadow-lg">
+//         <p className="font-semibold">{data.name}</p>
+//         <p className="text-sm">
+//           Amount: <strong>{data.value.toFixed(2)} BYN</strong>
+//         </p>
+//         <p className="text-sm">
+//           Percentage: <strong>{data.percentage.toFixed(1)}%</strong>
+//         </p>
+//       </div>
+//     );
+//   }
+//   return null;
+// };
+// export default function CircularDiagram() {
+//   const [diagramType, setDiagramType] = useState<"expense" | "income">(
+//     "expense"
+//   );
+//   const { transactions, categories } = useTransactions();
+//   const getCategoryData = (): CategoryData[] => {
+//     const filteredTransactions = transactions.filter((t) =>
+//       diagramType === "expense"
+//         ? t.type === "expense" || t.type === "expence"
+//         : t.type === "income"
+//     );
+//     const categoryMap = new Map<string, number>();
+//     filteredTransactions.forEach((transaction) => {
+//       const categoryId = transaction.category;
+//       const category = categories.find((c) => c.id === categoryId);
+//       const categoryName = category?.name || "Uncategorized";
+//       const amount = Math.abs(transaction.amount);
+//       categoryMap.set(
+//         categoryName,
+//         (categoryMap.get(categoryName) || 0) + amount
+//       );
+//     });
+//     // Calculate total for percentages
+//     const total = Array.from(categoryMap.values()).reduce(
+//       (sum, value) => sum + value,
+//       0
+//     );
+//     // Convert to array and sort by value (descending)
+//     const categoryData = Array.from(categoryMap.entries())
+//       .map(([name, value], index) => ({
+//         name,
+//         value,
+//         percentage: total > 0 ? (value / total) * 100 : 0,
+//         color: CATEGORY_COLORS[index % CATEGORY_COLORS.length],
+//       }))
+//       .sort((a, b) => b.value - a.value);
+//     return categoryData;
+//   };
+//   const categoryData = getCategoryData();
+//   const totalAmount = categoryData.reduce((sum, item) => sum + item.value, 0);
+//   return (
+//     <Card className="overflow-hidden w-full h-full max-w-none border rounded-lg border-gray-300 dark:border-gray-600 shadow-md shadow-gray-500 dark:shadow-gray-800 bg-[#f5f6fb] dark:bg-[#0c1017] p-5">
+//       <CardHeader className="flex md:flex-row flex-col items-center justify-between px-5 gap-2">
+//         <CardTitle className="text-lg font-semibold flex items-center gap-2">
+//           {diagramType === "expense"
+//             ? "Expenses by Category"
+//             : "Income by Category"}
+//         </CardTitle>
+//         <Tabs
+//           value={diagramType}
+//           onValueChange={(value) =>
+//             setDiagramType(value as "expense" | "income")
+//           }
+//         >
+//           <TabsList className="h-7">
+//             <TabsTrigger value="expense" className="text-sm h-8 px-4">
+//               <TrendingDown className="h-4 w-4 mr-1" />
+//               Expenses
+//             </TabsTrigger>
+//             <TabsTrigger value="income" className="text-sm h-8 px-4">
+//               <TrendingUp className="h-4 w-4 mr-1" />
+//               Income
+//             </TabsTrigger>
+//           </TabsList>
+//         </Tabs>
+//       </CardHeader>
+//       <CardContent className="h-[450px]">
+//         {categoryData.length > 0 ? (
+//           <div className="flex flex-col lg:flex-row items-center justify-between h-full lg:mb-0 mb-30 ">
+//             <div className="w-full h-full ">
+//               <ResponsiveContainer width="100%" height="100%">
+//                 <PieChart>
+//                   <Pie
+//                     data={categoryData}
+//                     cx="50%"
+//                     cy="50%"
+//                     labelLine={false}
+//                     label={({ name, percentage }) =>
+//                       percentage > 5 ? `${name}: ${percentage.toFixed(1)}%` : ""
+//                     }
+//                     outerRadius="90%"
+//                     fill="#8884d8"
+//                     dataKey="value"
+//                     className="
+//             [&_.recharts-pie]:sm:scale-90
+//             [&_.recharts-pie]:md:scale-100
+//             [&_.recharts-pie]:lg:scale-110
+//             [&_.recharts-pie]:xl:scale-120
+//           "
+//                   >
+//                     {categoryData.map((entry, index) => (
+//                       <Cell key={`cell-${index}`} fill={entry.color} />
+//                     ))}
+//                   </Pie>
+//                   <Tooltip content={<CustomTooltip />} />
+//                 </PieChart>
+//               </ResponsiveContainer>
+//             </div>
+//             <div className="w-full lg:w-1/2 space-y-2 md:space-y-4 ">
+//               <div className="text-center lg:text-left">
+//                 <div className="text-md sm:text-lg md:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white">
+//                   {totalAmount.toFixed(2)} BYN
+//                 </div>
+//                 <div className="text-xs md:text-sm text-gray-500 dark:text-gray-400">
+//                   Total {diagramType}
+//                 </div>
+//               </div>
+//               <div className="space-y-2 max-h-48 overflow-y-auto">
+//                 {categoryData.map((category, index) => (
+//                   <div
+//                     key={index}
+//                     className="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800"
+//                   >
+//                     <div className="flex items-center gap-2">
+//                       <div
+//                         className="w-3 h-3 rounded-full"
+//                         style={{ backgroundColor: category.color }}
+//                       />
+//                       <span className="text-sm font-medium">
+//                         {category.name}
+//                       </span>
+//                     </div>
+//                     <div className="text-right">
+//                       <div className="text-sm font-semibold p-1 sm:p-0">
+//                         {category.value.toFixed(2)} BYN
+//                       </div>
+//                       <div className="text-xs text-gray-500">
+//                         {category.percentage.toFixed(1)}%
+//                       </div>
+//                     </div>
+//                   </div>
+//                 ))}
+//               </div>
+//               <div className="text-center lg:text-left text-sm text-gray-600 dark:text-gray-400">
+//                 <strong>{categoryData.length}</strong> categories •{" "}
+//                 <strong>
+//                   {
+//                     transactions.filter((t) =>
+//                       diagramType === "expense"
+//                         ? t.type === "expense" || t.type === "expence"
+//                         : t.type === "income"
+//                     ).length
+//                   }
+//                 </strong>{" "}
+//                 transactions
+//               </div>
+//             </div>
+//           </div>
+//         ) : (
+//           <div className="flex items-center justify-center h-full text-gray-500 text-base md:text-lg">
+//             No {diagramType} data available
+//           </div>
+//         )}
+//       </CardContent>
+//     </Card>
+//   );
+// }
 __turbopack_context__.s([
     "default",
     ()=>CircularDiagram
@@ -468,14 +678,14 @@ const CustomTooltip = ({ active, payload })=>{
     if (active && payload && payload.length) {
         const data = payload[0].payload;
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "bg-white dark:bg-gray-800 p-3 border border-gray-200 dark:border-gray-700  rounded-lg shadow-lg",
+            className: "bg-white dark:bg-gray-800 p-3 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg",
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                     className: "font-semibold",
                     children: data.name
                 }, void 0, false, {
                     fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                    lineNumber: 47,
+                    lineNumber: 277,
                     columnNumber: 9
                 }, ("TURBOPACK compile-time value", void 0)),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -489,13 +699,13 @@ const CustomTooltip = ({ active, payload })=>{
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                            lineNumber: 49,
+                            lineNumber: 279,
                             columnNumber: 19
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                    lineNumber: 48,
+                    lineNumber: 278,
                     columnNumber: 9
                 }, ("TURBOPACK compile-time value", void 0)),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -509,19 +719,19 @@ const CustomTooltip = ({ active, payload })=>{
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                            lineNumber: 52,
+                            lineNumber: 282,
                             columnNumber: 23
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                    lineNumber: 51,
+                    lineNumber: 281,
                     columnNumber: 9
                 }, ("TURBOPACK compile-time value", void 0))
             ]
         }, void 0, true, {
             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-            lineNumber: 46,
+            lineNumber: 276,
             columnNumber: 7
         }, ("TURBOPACK compile-time value", void 0));
     }
@@ -530,7 +740,8 @@ const CustomTooltip = ({ active, payload })=>{
 function CircularDiagram() {
     const [diagramType, setDiagramType] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("expense");
     const { transactions, categories } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$app$2f$contexts$2f$TransactionContext$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useTransactions"])();
-    const getCategoryData = ()=>{
+    // ✅ Memoized computation to prevent unnecessary recalculations
+    const categoryData = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useMemo"])(()=>{
         const filteredTransactions = transactions.filter((t)=>diagramType === "expense" ? t.type === "expense" || t.type === "expence" : t.type === "income");
         const categoryMap = new Map();
         filteredTransactions.forEach((transaction)=>{
@@ -543,15 +754,17 @@ function CircularDiagram() {
         // Calculate total for percentages
         const total = Array.from(categoryMap.values()).reduce((sum, value)=>sum + value, 0);
         // Convert to array and sort by value (descending)
-        const categoryData = Array.from(categoryMap.entries()).map(([name, value], index)=>({
+        return Array.from(categoryMap.entries()).map(([name, value], index)=>({
                 name,
                 value,
                 percentage: total > 0 ? value / total * 100 : 0,
                 color: CATEGORY_COLORS[index % CATEGORY_COLORS.length]
             })).sort((a, b)=>b.value - a.value);
-        return categoryData;
-    };
-    const categoryData = getCategoryData();
+    }, [
+        transactions,
+        categories,
+        diagramType
+    ]);
     const totalAmount = categoryData.reduce((sum, item)=>sum + item.value, 0);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Card"], {
         className: "overflow-hidden w-full h-full max-w-none border rounded-lg border-gray-300 dark:border-gray-600 shadow-md shadow-gray-500 dark:shadow-gray-800 bg-[#f5f6fb] dark:bg-[#0c1017] p-5",
@@ -564,7 +777,7 @@ function CircularDiagram() {
                         children: diagramType === "expense" ? "Expenses by Category" : "Income by Category"
                     }, void 0, false, {
                         fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                        lineNumber: 112,
+                        lineNumber: 338,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$components$2f$ui$2f$tabs$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Tabs"], {
@@ -581,14 +794,14 @@ function CircularDiagram() {
                                             className: "h-4 w-4 mr-1"
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                                            lineNumber: 126,
+                                            lineNumber: 350,
                                             columnNumber: 15
                                         }, this),
                                         "Expenses"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                                    lineNumber: 125,
+                                    lineNumber: 349,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$components$2f$ui$2f$tabs$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TabsTrigger"], {
@@ -599,40 +812,40 @@ function CircularDiagram() {
                                             className: "h-4 w-4 mr-1"
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                                            lineNumber: 130,
+                                            lineNumber: 354,
                                             columnNumber: 15
                                         }, this),
                                         "Income"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                                    lineNumber: 129,
+                                    lineNumber: 353,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                            lineNumber: 124,
+                            lineNumber: 348,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                        lineNumber: 118,
+                        lineNumber: 344,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                lineNumber: 111,
+                lineNumber: 337,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardContent"], {
                 className: "h-[450px]",
                 children: categoryData.length > 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "flex flex-col lg:flex-row items-center justify-between h-full lg:mb-0 mb-30 ",
+                    className: "flex flex-col lg:flex-row items-center justify-between h-full lg:mb-0 mb-30",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "w-full h-full ",
+                            className: "w-full h-full",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$recharts$2f$es6$2f$component$2f$ResponsiveContainer$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ResponsiveContainer"], {
                                 width: "100%",
                                 height: "100%",
@@ -652,43 +865,43 @@ function CircularDiagram() {
                                                     fill: entry.color
                                                 }, `cell-${index}`, false, {
                                                     fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                                                    lineNumber: 162,
+                                                    lineNumber: 386,
                                                     columnNumber: 23
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                                            lineNumber: 143,
+                                            lineNumber: 367,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$recharts$2f$es6$2f$component$2f$Tooltip$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Tooltip"], {
                                             content: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(CustomTooltip, {}, void 0, false, {
                                                 fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                                                lineNumber: 165,
+                                                lineNumber: 389,
                                                 columnNumber: 37
                                             }, void 0)
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                                            lineNumber: 165,
+                                            lineNumber: 389,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                                    lineNumber: 142,
+                                    lineNumber: 366,
                                     columnNumber: 17
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                                lineNumber: 141,
+                                lineNumber: 365,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                            lineNumber: 140,
+                            lineNumber: 364,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "w-full lg:w-1/2 space-y-2 md:space-y-4 ",
+                            className: "w-full lg:w-1/2 space-y-2 md:space-y-4",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "text-center lg:text-left",
@@ -701,7 +914,7 @@ function CircularDiagram() {
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                                            lineNumber: 172,
+                                            lineNumber: 396,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -712,13 +925,13 @@ function CircularDiagram() {
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                                            lineNumber: 175,
+                                            lineNumber: 399,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                                    lineNumber: 171,
+                                    lineNumber: 395,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -736,7 +949,7 @@ function CircularDiagram() {
                                                             }
                                                         }, void 0, false, {
                                                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                                                            lineNumber: 187,
+                                                            lineNumber: 411,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -744,13 +957,13 @@ function CircularDiagram() {
                                                             children: category.name
                                                         }, void 0, false, {
                                                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                                                            lineNumber: 191,
+                                                            lineNumber: 415,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                                                    lineNumber: 186,
+                                                    lineNumber: 410,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -764,7 +977,7 @@ function CircularDiagram() {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                                                            lineNumber: 196,
+                                                            lineNumber: 420,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -775,24 +988,24 @@ function CircularDiagram() {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                                                            lineNumber: 199,
+                                                            lineNumber: 423,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                                                    lineNumber: 195,
+                                                    lineNumber: 419,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, index, true, {
                                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                                            lineNumber: 182,
+                                            lineNumber: 406,
                                             columnNumber: 19
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                                    lineNumber: 180,
+                                    lineNumber: 404,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -802,7 +1015,7 @@ function CircularDiagram() {
                                             children: categoryData.length
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                                            lineNumber: 208,
+                                            lineNumber: 432,
                                             columnNumber: 17
                                         }, this),
                                         " categories •",
@@ -811,7 +1024,7 @@ function CircularDiagram() {
                                             children: transactions.filter((t)=>diagramType === "expense" ? t.type === "expense" || t.type === "expence" : t.type === "income").length
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                                            lineNumber: 209,
+                                            lineNumber: 433,
                                             columnNumber: 17
                                         }, this),
                                         " ",
@@ -819,19 +1032,19 @@ function CircularDiagram() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                                    lineNumber: 207,
+                                    lineNumber: 431,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                            lineNumber: 170,
+                            lineNumber: 394,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                    lineNumber: 139,
+                    lineNumber: 363,
                     columnNumber: 11
                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "flex items-center justify-center h-full text-gray-500 text-base md:text-lg",
@@ -842,18 +1055,18 @@ function CircularDiagram() {
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                    lineNumber: 223,
+                    lineNumber: 447,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-                lineNumber: 137,
+                lineNumber: 361,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/Documents/GitHub/NextFinanceApp/app/components/Diagram.tsx",
-        lineNumber: 110,
+        lineNumber: 336,
         columnNumber: 5
     }, this);
 }
