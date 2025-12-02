@@ -70,8 +70,8 @@ export default function CreateTransaction() {
         text: `Operation created successfully!`,
       });
 
-      if (result.data) {
-        addTransaction(result.data);
+      if (result) {
+        addTransaction(result);
       }
 
       await refreshData();

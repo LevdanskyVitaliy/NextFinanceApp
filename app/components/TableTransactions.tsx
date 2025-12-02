@@ -60,7 +60,7 @@ export default function TransactionsTable() {
     };
 
     loadData();
-  }, [page, pageSize, sort, filters, fetchTableData]);
+  }, [page, pageSize, sort, filters]);
 
   const handleSort = (field: string) => {
     let direction: "desc" | "asc" | null = "desc";
@@ -286,7 +286,7 @@ export default function TransactionsTable() {
                       aria-label="Удалить"
                       onClick={(e) => {
                         e.stopPropagation();
-                        handleDelete(op.id);
+                        handleDelete(op.id as number);
                       }}
                       className="opacity-0 group-hover:opacity-100 transition"
                       disabled={tableData.loading}

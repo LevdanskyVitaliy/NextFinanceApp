@@ -17,14 +17,6 @@
       "date": "2025-11-03T00:00:00.000Z"
     },
     {
-      "id": "a8d6",
-      "amount": 99,
-      "category": "2",
-      "description": "stipa dva",
-      "type": "income",
-      "date": "2025-11-09T00:00:00.000Z"
-    },
-    {
       "id": "e609",
       "amount": 10,
       "category": "",
@@ -55,22 +47,6 @@
       "description": "oiio",
       "type": "income",
       "date": "2025-11-09T00:00:00.000Z"
-    },
-    {
-      "id": "6b9b",
-      "amount": 240,
-      "category": "9",
-      "description": "stipaaa",
-      "type": "income",
-      "date": "2025-11-12T00:00:00.000Z"
-    },
-    {
-      "id": "fe90",
-      "amount": 100,
-      "category": "9",
-      "description": "0000",
-      "type": "expense",
-      "date": "2025-11-12T00:00:00.000Z"
     },
     {
       "id": "9507",
@@ -143,14 +119,6 @@
       "description": "ewifhwef",
       "type": "expense",
       "date": "2025-11-20T00:00:00.000Z"
-    },
-    {
-      "id": "494a",
-      "amount": 1000,
-      "category": "8",
-      "description": "0eq23iroh",
-      "type": "income",
-      "date": "2025-11-29T00:00:00.000Z"
     },
     {
       "id": "50d7",

@@ -1,0 +1,3 @@
+module.exports=[22898,a=>{a.n(a.i(70900))},91474,a=>{a.n(a.i(86634))},77432,a=>{a.n(a.i(15582))},28158,a=>{a.n(a.i(36714))},94496,a=>{a.n(a.i(98181))},95976,a=>{a.n(a.i(87810))},68692,a=>{a.n(a.i(19181))},50505,a=>{"use strict";var b=a.i(84358);function c(){return(0,b.jsx)("div",{children:(0,b.jsx)("main",{className:" mt-10",children:"You are on the users page"})})}a.s(["default",()=>c])}];
+
+//# sourceMappingURL=Documents_GitHub_NextFinanceApp_509e6981._.js.map

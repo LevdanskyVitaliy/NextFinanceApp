@@ -1,7 +1,5 @@
 {
-  "/(auth)/users/[id]/edit/page": "app/(auth)/users/[id]/edit/page.js",
   "/(auth)/users/[id]/page": "app/(auth)/users/[id]/page.js",
   "/(auth)/users/page": "app/(auth)/users/page.js",
-  "/page": "app/page.js",
-  "/statistics/page": "app/statistics/page.js"
+  "/page": "app/page.js"
 }

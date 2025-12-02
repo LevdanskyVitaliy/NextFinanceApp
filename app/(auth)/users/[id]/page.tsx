@@ -21,7 +21,7 @@ export default async function TransactionPage({
   const categories = await api.getAllCategories();
 
   const result = await api.getTransactions({ page: 1, limit: 1000 });
-  const transaction = result.data.find((tx: any) => String(tx.id) === id);
+  const transaction = result.data?.find((tx: any) => String(tx.id) === id);
 
   if (!transaction) {
     return notFound();

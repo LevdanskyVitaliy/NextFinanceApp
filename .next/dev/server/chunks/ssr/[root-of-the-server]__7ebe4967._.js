@@ -479,8 +479,7 @@ function TransactionsTable() {
         page,
         pageSize,
         sort,
-        filters,
-        fetchTableData
+        filters
     ]);
     const handleSort = (field)=>{
         let direction = "desc";
@@ -1509,8 +1508,8 @@ function CreateTransaction() {
                 type: "success",
                 text: `Operation created successfully!`
             });
-            if (result.data) {
-                addTransaction(result.data);
+            if (result) {
+                addTransaction(result);
             }
             await refreshData();
             setFormData({

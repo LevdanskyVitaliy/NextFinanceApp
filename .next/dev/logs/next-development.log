@@ -1,17 +1,93 @@
-[00:00:05.763] Server  LOG      ✓ Ready in 4.7s
-[00:00:13.698] Server  LOG      ○ Compiling / ...
-[00:00:44.467] Server  LOG      ○ Compiling /statistics ...
-[00:00:50.534] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[00:00:50.534] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[00:00:50.534] Browser WARN    WARNING: Invalid layout total size: 70%, 20%. Layout normalization will be applied.
-[00:00:50.534] Browser WARN    WARNING: Invalid layout total size: 35%, 70%. Layout normalization will be applied.
-[00:00:50.534] Browser WARN    WARNING: Invalid layout total size: 70%, 20%. Layout normalization will be applied.
-[00:00:50.534] Browser WARN    WARNING: Invalid layout total size: 35%, 70%. Layout normalization will be applied.
-[00:01:29.655] Browser LOG     Fetching transaction with ID: 25c2
-[00:01:29.989] Browser LOG     Transaction found: {"amount":1000,"category":"9","date":"2025-11-27","description":"Iononoh","id":"25c2","type":"income"}
+[00:00:03.797] Server  LOG      ✓ Ready in 2.8s
+[00:00:08.133] Server  LOG      ○ Compiling /users/[id] ...
+[00:01:17.361] Server  LOG      ✓ Compiled in 210ms
+[00:01:17.432] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:12:48.365] Server  LOG      ✓ Compiled in 314ms
+[00:12:48.463] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:12:48.775] Server  LOG      ✓ Compiled in 0ms
+[00:13:32.501] Server  LOG      ✓ Compiled in 103ms
+[00:21:20.737] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:21:21.042] Server  LOG      ✓ Compiled in 135ms
+[00:22:36.153] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:22:36.160] Server  LOG      ✓ Compiled in 206ms
+[00:22:56.772] Server  LOG      ✓ Compiled in 135ms
+[00:22:56.855] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:22:56.972] Server  LOG      ✓ Compiled in 0ms
+[00:24:32.163] Server  LOG      ✓ Compiled in 160ms
+[00:24:32.414] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:24:32.514] Server  LOG      ✓ Compiled in 0ms
+[00:27:38.231] Server  LOG      ✓ Compiled in 132ms
+[00:27:38.417] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:27:38.508] Server  LOG      ✓ Compiled in 0ms
+[00:27:43.336] Server  LOG      ✓ Compiled in 140ms
+[00:27:44.389] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:27:53.120] Server  LOG      ✓ Compiled in 157ms
+[00:27:53.302] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:27:53.482] Server  LOG      ✓ Compiled in 0ms
+[00:30:09.443] Server  LOG      ✓ Compiled in 225ms
+[00:30:09.562] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:30:50.134] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:30:50.768] Server  LOG      ✓ Compiled in 294ms
+[00:31:47.527] Server  LOG      ✓ Compiled in 189ms
+[00:31:47.542] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:34:32.918] Server  LOG      ✓ Compiled in 159ms
+[00:34:32.945] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:34:33.098] Server  LOG      ✓ Compiled in 0ms
+[00:34:43.826] Server  LOG      ✓ Compiled in 132ms
+[00:34:43.878] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:34:44.219] Server  LOG      ✓ Compiled in 0ms
+[00:38:16.383] Server  LOG      ✓ Compiled in 154ms
+[00:38:16.422] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:39:26.356] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:39:26.358] Server  LOG      ✓ Compiled in 214ms
+[00:39:30.075] Server  ERROR    ⨯ TypeError: {imported module ./Documents/GitHub/NextFinanceApp/app/services/logic.ts}.default is not a constructor
+[00:39:33.762] Browser ERROR   uncaughtError: TypeError: __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$app$2f$services$2f$logic$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__.default is not a constructor
+[00:39:39.308] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:39:39.309] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:39:39.309] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:39:39.837] Server  LOG      ✓ Compiled in 139ms
+[00:40:41.234] Server  LOG      ✓ Compiled in 187ms
+[00:40:41.250] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:56:11.095] Server  LOG      ✓ Compiled in 917ms
+[00:56:11.098] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/contexts/TransactionContext.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:56:41.322] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/contexts/TransactionContext.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:56:41.363] Server  LOG      ✓ Compiled in 214ms
+[01:02:51.795] Server  LOG      ✓ Compiled in 602ms
+[01:02:52.188] Browser ERROR   The final argument passed to %s changed size between renders. The order and size of this array must remain constant.
+
+Previous: %s
+Incoming: %s useEffect [1, 20, [object Object], [object Object], async (options)=>{
+            setTableLoading(true);
+            try {
+                const result = await api.getTransactions({
+                    page: options.page,
+                    limit: options.limit,
+                    sort: options.sort?.field ? {
+                        field: options.sort.field,
+                        direction: options.sort.direction || "desc"
+                    } : {
+                        field: "date",
+                        direction: "desc"
+                    },
+                    filters: options.filters
+                });
+                setTableTransactions(result.data || []);
+                setTableTotalPages(result.pages || 1);
+                setTableTotalItems(result.items || 0);
+                setCurrentTableOptions({
+                    "TransactionProvider.useCallback[fetchTableData]": (prev)=>{
+                        if (JSON.stringify(prev) === JSON.stringify(options)) {
+                            return prev;
+                        }
+                        return options;
+                    }
+                }["TransactionProvider.useCallback[fetchTableData]"]);
+            } catch (error) {
+                console.error("Error fetching table data:", error);
+                setTableTransactions([]);
+                setTableTotalPages(1);
+                setTableTotalItems(0);
+            } finally{
+                setTableLoading(false);
+            }
+        }] [1, 20, [object Object], [object Object]]
