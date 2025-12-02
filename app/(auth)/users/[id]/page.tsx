@@ -14,7 +14,7 @@ import {
 export default async function TransactionPage({
   params,
 }: {
-  params: { id: string | number };
+  params: Promise<{ id: string | number}>; 
 }) {
   const { id } = await params;
   const api = new Api();
