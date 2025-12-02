@@ -241,8 +241,10 @@ import {
   Cell,
   ResponsiveContainer,
   Tooltip,
-  type PieChartData
+
 } from "recharts";
+
+
 
 const CATEGORY_COLORS = [
   "#3B82F6",
@@ -262,12 +264,14 @@ const CATEGORY_COLORS = [
   "#06B6D4",
 ];
 
-interface CategoryData extends PieChartData {
+interface CategoryData {
   name: string;
   value: number;
   percentage: number;
   color: string;
+  [key: string]: string | number;
 }
+
 
 const CustomTooltip = ({ active, payload }: any) => {
   if (active && payload && payload.length) {
