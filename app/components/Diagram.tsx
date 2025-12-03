@@ -5,16 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TrendingUp, TrendingDown } from "lucide-react";
 import { useTransactions } from "../contexts/TransactionContext";
-import {
-  PieChart,
-  Pie,
-  Cell,
-  ResponsiveContainer,
-  Tooltip,
-
-} from "recharts";
-
-
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 
 const CATEGORY_COLORS = [
   "#3B82F6",
@@ -42,7 +33,6 @@ interface CategoryData {
   [key: string]: string | number;
 }
 
-
 const CustomTooltip = ({ active, payload }: any) => {
   if (active && payload && payload.length) {
     const data = payload[0].payload;
@@ -62,7 +52,9 @@ const CustomTooltip = ({ active, payload }: any) => {
 };
 
 export default function CircularDiagram() {
-  const [diagramType, setDiagramType] = useState<"expense" | "income">("expense");
+  const [diagramType, setDiagramType] = useState<"expense" | "income">(
+    "expense"
+  );
   const { transactions, categories } = useTransactions();
 
   // ✅ Memoized computation to prevent unnecessary recalculations
@@ -107,9 +99,9 @@ export default function CircularDiagram() {
   const totalAmount = categoryData.reduce((sum, item) => sum + item.value, 0);
 
   return (
-    <Card className="overflow-hidden w-full h-full max-w-none border rounded-lg border-gray-300 dark:border-gray-600 shadow-md shadow-gray-500 dark:shadow-gray-800 bg-[#f5f6fb] dark:bg-[#0c1017] p-5">
+    <Card className="overflow-hidden w-full h-full max-w-none border rounded-lg border-gray-300 dark:border-gray-600 shadow-md shadow-gray-500 dark:shadow-gray-800 bg-[#f5f6fb] dark:bg-[#0c1017] sm:p-5 p-1 pt-1 sm:pt-3">
       <CardHeader className="flex md:flex-row flex-col items-center justify-between px-5 gap-2">
-        <CardTitle className="text-lg font-semibold flex items-center gap-2">
+        <CardTitle className="text-md md:text-lg font-semibold flex items-center gap-2">
           {diagramType === "expense"
             ? "Expenses by Category"
             : "Income by Category"}
@@ -117,9 +109,11 @@ export default function CircularDiagram() {
 
         <Tabs
           value={diagramType}
-          onValueChange={(value) => setDiagramType(value as "expense" | "income")}
+          onValueChange={(value) =>
+            setDiagramType(value as "expense" | "income")
+          }
         >
-          <TabsList className="h-7">
+          <TabsList className="h-7 pt-8 sm:pt-2 flex flex-col gap-2  sm:flex-row sm:items-center">
             <TabsTrigger value="expense" className="text-sm h-8 px-4">
               <TrendingDown className="h-4 w-4 mr-1" />
               Expenses
@@ -138,22 +132,19 @@ export default function CircularDiagram() {
             <div className="w-full h-full">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
-                <Pie
-  data={categoryData}
-  cx="50%"
-  cy="50%"
-  labelLine={false}
-  // label={({ name, percentage}) =>
-  //   categoryData.percentage  > 0.05 ? `${name}: ${(percentage * 100).toFixed(1)}%` : ""
-  // }
-  outerRadius="90%"
-  fill="#8884d8"
-  dataKey="value"
->
-  {categoryData.map((entry, index) => (
-    <Cell key={`cell-${index}`} fill={entry.color} />
-  ))}
-</Pie>
+                  <Pie
+                    data={categoryData}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    outerRadius="90%"
+                    fill="#8884d8"
+                    dataKey="value"
+                  >
+                    {categoryData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
                   <Tooltip content={<CustomTooltip />} />
                 </PieChart>
               </ResponsiveContainer>
@@ -168,33 +159,34 @@ export default function CircularDiagram() {
                   Total {diagramType}
                 </div>
               </div>
-
               <div className="space-y-2 max-h-48 overflow-y-auto">
-                {categoryData.map((category, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800"
-                  >
-                    <div className="flex items-center gap-2">
-                      <div
-                        className="w-3 h-3 rounded-full"
-                        style={{ backgroundColor: category.color }}
-                      />
-                      <span className="text-sm font-medium">
-                        {category.name}
-                      </span>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-sm font-semibold p-1 sm:p-0">
-                        {category.value.toFixed(2)} BYN
-                      </div>
-                      <div className="text-xs text-gray-500">
-                        {category.percentage.toFixed(1)}%
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+  {categoryData.map((category, index) => (
+    <div
+      key={index}
+      className="flex flex-col sm:flex-row sm:justify-between p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 gap-2"
+    >
+    
+      <div className="flex flex-col sm:flex-row sm:justify-between w-full">
+        <div className="flex items-center gap-1">
+          <div
+            className="w-3 h-3 rounded-full"
+            style={{ backgroundColor: category.color }}
+          />
+          <span className="text-sm font-medium border-b border-white overflow-auto max-w-25 ">{category.name}</span>
+        </div>
+        <div className="text-right">
+          <div className="text-sm font-semibold">
+            {category.value.toFixed(2)} BYN
+          </div>
+          <div className="text-xs text-gray-500">
+            {category.percentage.toFixed(1)}%
+          </div>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
 
               <div className="text-center lg:text-left text-sm text-gray-600 dark:text-gray-400">
                 <strong>{categoryData.length}</strong> categories •{" "}

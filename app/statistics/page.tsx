@@ -15,13 +15,13 @@ export default function ResizableDemo() {
     <div className="min-h-screen w-screen bg-background">
       <ResizablePanelGroup
         direction="horizontal"
-        className="w-full h-full pt-20"
+        className="w-full h-full pt-20 md:pt-10"
       >
         <ResizablePanel
           defaultSize={35}
           minSize={30}
           maxSize={40}
-          className="min-w-[250px]"
+          className="min-w-[150px]"
         >
           <div className="flex h-full w-full items-center justify-center p-4 bg-muted/50">
             <AmountsTable />
@@ -52,10 +52,12 @@ export default function ResizableDemo() {
                   <span className="font-semibold text-lg">
                     Transactions Summary
                   </span>
-                  <div className="mt-2 space-y-1 text-sm">
+                  <div className="mt-2 space-y-1 text-sm sm:items-center">
+                  
                     <p className="text-muted-foreground">
                       Total: <strong>{transactions.length}</strong> transactions
                     </p>
+                    <div className="mt-2 space-y-1 text-sm flex flex-col sm:flex-row sm:items-center sm:space-x-4">
                     <p className="text-muted-foreground">
                       Income:{" "}
                       <strong className="text-green-600">
@@ -72,6 +74,7 @@ export default function ResizableDemo() {
                         }
                       </strong>
                     </p>
+                    </div>
                   </div>
                 </div>
               </div>
