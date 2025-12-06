@@ -12,7 +12,7 @@ export default function ResizableDemo() {
   const { transactions } = useTransactions();
 
   return (
-    <div className="min-h-screen w-screen bg-background">
+    <div className="min-h-screen w-screen bg-background mt-10">
       <ResizablePanelGroup
         direction="horizontal"
         className="w-full h-full pt-20 md:pt-10"
