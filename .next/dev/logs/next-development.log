@@ -1,25 +1,14 @@
-[00:00:04.324] Server  LOG      ✓ Ready in 3s
-[00:02:50.574] Server  LOG      ○ Compiling /statistics ...
-[00:03:06.258] Browser WARN    WARNING: Invalid layout total size: 70%, 20%. Layout normalization will be applied.
-[00:03:06.258] Browser WARN    WARNING: Invalid layout total size: 35%, 70%. Layout normalization will be applied.
-[00:03:06.258] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+[00:00:12.042] Server  LOG      ✓ Ready in 10.9s
+[00:00:18.702] Server  LOG      ○ Compiling /statistics ...
+[00:00:53.506] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
        please check the style of container, or the props width(100%) and height(100%),
        or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
        height and width.
-[00:03:06.258] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
+[00:00:53.506] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
        please check the style of container, or the props width(100%) and height(100%),
        or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
        height and width.
-[00:08:17.446] Browser WARN    WARNING: Invalid layout total size: 70%, 20%. Layout normalization will be applied.
-[00:08:17.446] Browser WARN    WARNING: Invalid layout total size: 35%, 70%. Layout normalization will be applied.
-[00:08:17.446] Browser WARN    WARNING: Invalid layout total size: 70%, 20%. Layout normalization will be applied.
-[00:08:17.446] Browser WARN    WARNING: Invalid layout total size: 35%, 70%. Layout normalization will be applied.
-[00:08:17.446] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[00:08:17.446] Browser WARN    The width(-1) and height(-1) of chart should be greater than 0,
-       please check the style of container, or the props width(100%) and height(100%),
-       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
-       height and width.
-[00:08:38.714] Server  LOG      ✓ Compiled in 448ms
+[00:00:53.507] Browser WARN    WARNING: Invalid layout total size: 70%, 20%. Layout normalization will be applied.
+[00:00:53.507] Browser WARN    WARNING: Invalid layout total size: 35%, 70%. Layout normalization will be applied.
+[00:00:53.507] Browser WARN    WARNING: Invalid layout total size: 70%, 20%. Layout normalization will be applied.
+[00:00:53.507] Browser WARN    WARNING: Invalid layout total size: 35%, 70%. Layout normalization will be applied.
