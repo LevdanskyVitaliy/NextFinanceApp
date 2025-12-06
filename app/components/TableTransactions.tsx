@@ -241,6 +241,7 @@ export default function TransactionsTable() {
                 key={op.id}
                 className="group hover:bg-gray-300 dark:hover:bg-gray-900 cursor-pointer"
                 onClick={() => router.push(`/users/${op.id}`)}
+                //   <Link href={`/users/${op.id}/edit`} passHref>
               >
                 <TableCell>
                   {new Date(op.date).toLocaleDateString("ru-RU")}

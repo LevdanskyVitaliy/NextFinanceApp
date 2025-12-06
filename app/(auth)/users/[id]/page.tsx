@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Api from "../../../services/logic";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import Head from 'next/head';
 import {
   Item,
   ItemActions,
@@ -63,6 +64,10 @@ export default async function TransactionPage({
 
   return (
     <div className="max-w-xl p-6 border border-gray-300 dark:border-gray-600  dark:text-white bg-[#f5f6fb] dark:bg-[#0c1017] rounded-lg shadow-md shadow-gray-500 dark:shadow-gray-800">
+       <Head>
+        <title>Transaction Profile | NextFinanceApp</title>
+        <meta name="description" content="Detailed user profile and financial overview." />
+      </Head>
       <Item variant="muted">
         <ItemContent>
           <ItemTitle className="border-b-2 ">

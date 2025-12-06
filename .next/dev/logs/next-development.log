@@ -12,3 +12,9 @@
 [00:00:53.507] Browser WARN    WARNING: Invalid layout total size: 35%, 70%. Layout normalization will be applied.
 [00:00:53.507] Browser WARN    WARNING: Invalid layout total size: 70%, 20%. Layout normalization will be applied.
 [00:00:53.507] Browser WARN    WARNING: Invalid layout total size: 35%, 70%. Layout normalization will be applied.
+[00:06:59.691] Server  LOG      ✓ Compiled in 340ms
+[00:09:20.182] Server  LOG      ✓ Compiled in 213ms
+[00:16:13.834] Browser LOG     Fetching transaction with ID: 7e6d
+[00:16:13.834] Browser LOG     Transaction found: {"amount":10,"category":"1","date":"2025-12-03","description":"fbjdij","id":"7e6d","type":"expense"}
+[00:28:16.929] Server  LOG      ✓ Compiled in 535ms
+[00:28:25.973] Server  LOG      ✓ Compiled in 94ms
