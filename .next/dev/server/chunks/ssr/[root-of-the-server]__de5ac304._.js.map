@@ -2,5 +2,5 @@
   "version": 3,
   "sources": [],
   "sections": [
-    {"offset": {"line": 26, "column": 0}, "map": {"version":3,"sources":["file:///Users/vitaliylevdansky/Documents/GitHub/NextFinanceApp/app/%28auth%29/users/page.tsx"],"sourcesContent":["export default function Home() {\n  return (\n    <div>\n     <main className=\" mt-10\">You are on the users page</main>\n\n    </div>\n  )\n}\n"],"names":[],"mappings":";;;;;;AAAe,SAAS;IACtB,qBACE,uRAAC;kBACA,cAAA,uRAAC;YAAK,WAAU;sBAAS;;;;;;;;;;;AAI9B","debugId":null}}]
+    {"offset": {"line": 26, "column": 0}, "map": {"version":3,"sources":["file:///Users/vitaliylevdansky/Documents/GitHub/NextFinanceApp/app/%28auth%29/users/page.tsx"],"sourcesContent":["export default function Home() {\n  return (\n    <div>\n     <main className=\" mt-10\">You are on the users page</main>\n\n    </div>\n  )\n}\n"],"names":[],"mappings":";;;;;;AAAe,SAAS;IACtB,qBACE,uRAAC;kBACA,cAAA,uRAAC;YAAK,WAAU;sBAAS;;;;;;;;;;;AAI9B"}}]
 }

@@ -15,6 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Edit, Trash } from "lucide-react";
 import { SortOptions } from "../services/logic";
+import MiniSearch from "minisearch";
 
 export default function TransactionsTable() {
   const {
@@ -123,19 +124,19 @@ export default function TransactionsTable() {
   }, [tableData.transactions.length, page, tableData.loading]);
 
   return (
-    <div className="max-h-[600px] overflow-scroll max-w-2xl lg:max-w-3xl bg-[#f5f6fb] dark:bg-[#0c1017] pt-0 p-5 pb-0 mt-4 rounded-lg border border-gray-300 dark:border-gray-600 shadow-md shadow-gray-500 dark:shadow-gray-800 no-scrollbar">
+    <div className="max-h-[600px] overflow-scroll max-w-lg lg:max-w-3xl md:max-w-2xl sm:max-w-xl  bg-[#f5f6fb] dark:bg-[#0c1017] pt-0 p-5 pb-0 mt-4 rounded-lg border border-gray-300 dark:border-gray-600 shadow-md shadow-gray-500 dark:shadow-gray-800 no-scrollbar">
       <div className="sticky top-0 z-2 flex items-center justify-between pt-4 pb-4 bg-[#f5f6fb] dark:bg-[#0c1017]">
-        <span className="flex items-start justify-between text-lg sm:text-xl font-bold">
+        <span className="sm:flex items-start justify-between text-md sm:text-lg md:text-xl hidden  font-bold">
           Transactions
         </span>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center  gap-4 md:gap-2">
           <div className="flex items-center gap-2">
             <select
               value={filters.type || ""}
               onChange={(e) =>
                 updateFilters({ ...filters, type: e.target.value })
               }
-              className="border border-gray-300 bg-white dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-900 rounded p-1 text-sm"
+              className="border border-gray-300 bg-white dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-900 rounded p-1 text-xs md:text-sm"
             >
               <option value="">All Types</option>
               <option value="income">Income</option>
@@ -147,7 +148,7 @@ export default function TransactionsTable() {
               onChange={(e) =>
                 updateFilters({ ...filters, category: e.target.value })
               }
-              className="border border-gray-300 bg-white dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-900 rounded p-1 text-sm w-30 md:w-40"
+              className="border border-gray-300 bg-white dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-900 rounded p-1 text-xs md:text-sm w-30 md:w-40"
             >
               <option value="">All Categories</option>
               {categories.map((cat) => (
@@ -164,7 +165,7 @@ export default function TransactionsTable() {
               onChange={(e) =>
                 updateFilters({ ...filters, description: e.target.value })
               }
-              className="border border-gray-300 bg-white dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-900 rounded p-1 text-sm w-20 md:w-35"
+              className="border border-gray-300 bg-white dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-900 rounded p-1 text-xs md:text-sm w-20 md:w-35"
             />
           </div>
 
@@ -179,7 +180,7 @@ export default function TransactionsTable() {
                 setPageSize(Number(e.target.value));
                 setPage(1);
               }}
-              className="border border-gray-300 bg-white dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-900 rounded p-1 text-sm"
+              className="border border-gray-300 bg-white dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-900 rounded p-1 text-xs md:text-sm"
             >
               {[10, 20, 50].map((size) => (
                 <option key={size} value={size}>
@@ -246,8 +247,8 @@ export default function TransactionsTable() {
                 <TableCell>
                   {new Date(op.date).toLocaleDateString("ru-RU")}
                 </TableCell>
-                <TableCell>{getCategoryName(op.category)}</TableCell>
-                <TableCell className="overflow-scroll min-w-30 max-w-45">
+                <TableCell className="text-xs md:text-sm min-w-20 max-w-25 sm:min-w-25 sm:max-w-30 md:min-w-30 md:max-w-45">{getCategoryName(op.category)}</TableCell>
+                <TableCell className="overflow-scroll text-xs md:text-sm min-w-20 max-w-25 sm:min-w-25 sm:max-w-30 md:min-w-30 md:max-w-45">
                   {op.description}
                 </TableCell>
                 <TableCell>
@@ -360,3 +361,5 @@ export default function TransactionsTable() {
     </div>
   );
 }
+
+

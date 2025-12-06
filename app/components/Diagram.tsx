@@ -57,7 +57,6 @@ export default function CircularDiagram() {
   );
   const { transactions, categories } = useTransactions();
 
-
   const categoryData = useMemo<CategoryData[]>(() => {
     const filteredTransactions = transactions.filter((t) =>
       diagramType === "expense"
@@ -79,7 +78,6 @@ export default function CircularDiagram() {
       );
     });
 
-   
     const total = Array.from(categoryMap.values()).reduce(
       (sum, value) => sum + value,
       0
@@ -159,33 +157,33 @@ export default function CircularDiagram() {
                 </div>
               </div>
               <div className="space-y-2 max-h-48 overflow-y-auto">
-  {categoryData.map((category, index) => (
-    <div
-      key={index}
-      className="flex flex-col sm:flex-row sm:justify-between p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 gap-2"
-    >
-    
-      <div className="flex flex-col sm:flex-row sm:justify-between w-full">
-        <div className="flex items-center gap-1">
-          <div
-            className="w-3 h-3 rounded-full"
-            style={{ backgroundColor: category.color }}
-          />
-          <span className="text-sm font-medium border-b border-white overflow-auto max-w-25 ">{category.name}</span>
-        </div>
-        <div className="text-right">
-          <div className="text-sm font-semibold">
-            {category.value.toFixed(2)} BYN
-          </div>
-          <div className="text-xs text-gray-500">
-            {category.percentage.toFixed(1)}%
-          </div>
-        </div>
-      </div>
-    </div>
-  ))}
-</div>
-
+                {categoryData.map((category, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-col sm:flex-row sm:justify-between p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 gap-2"
+                  >
+                    <div className="flex flex-col sm:flex-row sm:justify-between w-full">
+                      <div className="flex items-center gap-1">
+                        <div
+                          className="w-3 h-3 rounded-full"
+                          style={{ backgroundColor: category.color }}
+                        />
+                        <span className="text-sm font-medium border-b border-white overflow-auto max-w-25 ">
+                          {category.name}
+                        </span>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-sm font-semibold">
+                          {category.value.toFixed(2)} BYN
+                        </div>
+                        <div className="text-xs text-gray-500">
+                          {category.percentage.toFixed(1)}%
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
 
               <div className="text-center lg:text-left text-sm text-gray-600 dark:text-gray-400">
                 <strong>{categoryData.length}</strong> categories •{" "}

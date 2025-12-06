@@ -1,3 +1,5 @@
+
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -53,6 +55,16 @@ export default function CreateTransaction() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    // Prevent submission if amount is 0
+    if (formData.amount === 0) {
+      setMessage({
+        type: "error",
+        text: "Please enter a valid amount greater than 0",
+      });
+      return;
+    }
+
     setLoading(true);
     setMessage(null);
 
@@ -76,6 +88,7 @@ export default function CreateTransaction() {
 
       await refreshData();
 
+      // Reset form but keep first category selected
       setFormData({
         amount: 0,
         category: categories.length > 0 ? String(categories[0].id) : "",
@@ -102,7 +115,7 @@ export default function CreateTransaction() {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: name === "amount" ? parseFloat(value) || !0 : value,
+      [name]: name === "amount" ? parseFloat(value) || 0 : value,
     }));
   };
 
@@ -157,11 +170,12 @@ export default function CreateTransaction() {
               type="number"
               id="amount"
               name="amount"
-              min={0}
+              min={0.01}
               step="0.01"
-              value={formData.amount}
+              value={formData.amount || ""}
               onChange={handleChange}
               required
+              placeholder="0.00"
             />
           </div>
 
@@ -234,7 +248,7 @@ export default function CreateTransaction() {
 
           <Button
             type="submit"
-            disabled={loading}
+            disabled={loading || formData.amount === 0}
             className="w-full dark:bg-blue-500 bg-blue-400 hover:bg-blue-300 rounded-xl p-2 dark:hover:bg-blue-400"
           >
             {loading ? "Creating..." : "Create Operation"}

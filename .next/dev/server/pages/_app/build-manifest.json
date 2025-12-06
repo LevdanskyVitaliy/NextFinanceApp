@@ -6,17 +6,17 @@
   "rootMainFiles": [],
   "pages": {
     "/_app": [
-      "static/chunks/07e91_next_dist_compiled_6aa50b33._.js",
-      "static/chunks/07e91_next_dist_shared_lib_03794ecf._.js",
-      "static/chunks/07e91_next_dist_client_1566a825._.js",
-      "static/chunks/07e91_next_dist_0b80a750._.js",
-      "static/chunks/07e91_next_app_807d480f.js",
-      "static/chunks/[next]_entry_page-loader_ts_a3eca510._.js",
-      "static/chunks/07e91_react-dom_8c40f148._.js",
-      "static/chunks/07e91_b8fc0fdf._.js",
-      "static/chunks/[root-of-the-server]__e8553e64._.js",
-      "static/chunks/my-app_pages__app_2da965e7._.js",
-      "static/chunks/turbopack-my-app_pages__app_d0d40523._.js"
+      "static/chunks/6aa24_next_dist_compiled_72f618ed._.js",
+      "static/chunks/6aa24_next_dist_shared_lib_a1c3f387._.js",
+      "static/chunks/6aa24_next_dist_client_345f2832._.js",
+      "static/chunks/6aa24_next_dist_2f58fccc._.js",
+      "static/chunks/6aa24_next_app_abd494b4.js",
+      "static/chunks/[next]_entry_page-loader_ts_c43e2a33._.js",
+      "static/chunks/6aa24_react-dom_0d4d3224._.js",
+      "static/chunks/6aa24_75961863._.js",
+      "static/chunks/[root-of-the-server]__1d239d3f._.js",
+      "static/chunks/Documents_GitHub_NextFinanceApp_pages__app_2da965e7._.js",
+      "static/chunks/turbopack-Documents_GitHub_NextFinanceApp_pages__app_6e43422c._.js"
     ]
   },
   "ampFirstPages": []
