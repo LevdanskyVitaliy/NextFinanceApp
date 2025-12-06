@@ -57,7 +57,7 @@ export default function CircularDiagram() {
   );
   const { transactions, categories } = useTransactions();
 
-  // ✅ Memoized computation to prevent unnecessary recalculations
+
   const categoryData = useMemo<CategoryData[]>(() => {
     const filteredTransactions = transactions.filter((t) =>
       diagramType === "expense"
@@ -79,13 +79,12 @@ export default function CircularDiagram() {
       );
     });
 
-    // Calculate total for percentages
+   
     const total = Array.from(categoryMap.values()).reduce(
       (sum, value) => sum + value,
       0
     );
 
-    // Convert to array and sort by value (descending)
     return Array.from(categoryMap.entries())
       .map(([name, value], index) => ({
         name,

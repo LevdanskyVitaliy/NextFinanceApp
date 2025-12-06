@@ -113,20 +113,28 @@
       "date": "2025-11-27T00:00:00.000Z"
     },
     {
-      "id": "c616",
-      "amount": 1000,
-      "category": "1",
-      "description": "ewifhwef",
-      "type": "expense",
-      "date": "2025-11-20T00:00:00.000Z"
-    },
-    {
       "id": "50d7",
       "amount": 100000,
       "category": "1",
       "description": "regherogh",
       "type": "income",
       "date": "2025-11-30T00:00:00.000Z"
+    },
+    {
+      "id": "7e6d",
+      "amount": 10,
+      "category": "1",
+      "description": "fbjdij",
+      "type": "expense",
+      "date": "2025-12-03T00:00:00.000Z"
+    },
+    {
+      "id": "11f9",
+      "amount": 10,
+      "category": "2",
+      "description": "aoifeh",
+      "type": "expense",
+      "date": "2025-12-06T00:00:00.000Z"
     }
   ],
   "categories": [

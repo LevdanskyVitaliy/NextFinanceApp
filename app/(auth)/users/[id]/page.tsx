@@ -38,7 +38,6 @@ export default async function TransactionPage({
       category = categories.find((cat) => String(cat.id) === String(id));
     }
 
-    // If still not found, try converting both to numbers
     if (!category) {
       const numId = Number(id);
       if (!isNaN(numId)) {
