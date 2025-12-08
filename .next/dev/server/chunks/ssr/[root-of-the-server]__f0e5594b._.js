@@ -183,8 +183,39 @@ class Api {
         }
         return await response.json();
     };
+    // async getTransactions(params: Params = {}): Promise<PaginatedTransactions> {
+    //   const {
+    //     page = 1,
+    //     limit, // optional
+    //     filters = {},
+    //     sort = { field: "", direction: "desc" },
+    //   } = params;
+    //   const query = new URLSearchParams({
+    //     _page: page.toString(),
+    //     ...filters,
+    //   });
+    //   if (limit) {
+    //     query.set("_per_page", limit.toString());
+    //   }
+    //   if (sort.field) {
+    //     query.set(
+    //       "_sort",
+    //       sort.direction === "desc" ? `-${sort.field}` : sort.field
+    //     );
+    //   }
+    //   const response = await this.#fetch(`/transactions?${query.toString()}`);
+    //   const totalItems = response.items;
+    //   const totalPages = limit ? Math.ceil(totalItems / limit) : 1;
+    //   return {
+    //     data: response.data,
+    //     pages: totalPages,
+    //     items: totalItems,
+    //     currentPage: page,
+    //     pageSize: limit ?? totalItems, // if no limit, treat as "all"
+    //   };
+    // }
     async getTransactions(params = {}) {
-        const { page = 1, limit = 10, filters = {}, sort = {
+        const { page = 1, limit = 10000, filters = {}, sort = {
             field: "",
             direction: "desc"
         } } = params;
@@ -197,11 +228,12 @@ class Api {
             query.set("_sort", sort.direction === "desc" ? `-${sort.field}` : sort.field);
         }
         const response = await this.#fetch(`/transactions?${query.toString()}`);
-        // const data = Array.isArray(response) ? response : [];
-        const totalItems = response.items;
+        // Handle both paginated and non-paginated responses from json-server
+        const data = Array.isArray(response) ? response : response.data || response || [];
+        const totalItems = response.items || response.length || data.length || 0;
         const totalPages = Math.ceil(totalItems / limit);
         return {
-            data: response.data,
+            data,
             pages: totalPages,
             items: totalItems,
             currentPage: page,
@@ -463,10 +495,7 @@ async function TransactionPage({ params }) {
     const { id } = await params;
     const api = new __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$app$2f$services$2f$logic$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"]();
     const categories = await api.getAllCategories();
-    const result = await api.getTransactions({
-        page: 1,
-        limit: 1000
-    });
+    const result = await api.getTransactions();
     const transaction = result.data?.find((tx)=>String(tx.id) === id);
     if (!transaction) {
         return (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$client$2f$components$2f$navigation$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["notFound"])();
@@ -539,7 +568,7 @@ async function TransactionPage({ params }) {
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$components$2f$ui$2f$item$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["ItemDescription"], {
                             children: [
                                 "Date: ",
-                                new Date(transaction.date).toLocaleDateString()
+                                new Date(transaction.date).toLocaleDateString("ru-RU")
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/[id]/page.tsx",
@@ -555,40 +584,54 @@ async function TransactionPage({ params }) {
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("dl", {
                             className: "grid grid-cols-2 gap-x-6 gap-y-3",
-                            children: Object.entries(displayTransaction).map(([key, value])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            children: Object.entries(displayTransaction).map(([key, value])=>{
+                                let displayValue;
+                                if (key === "date") {
+                                    // Format the date string
+                                    displayValue = new Date(value).toLocaleDateString("en-US", {
+                                        year: "numeric",
+                                        month: "short",
+                                        day: "numeric"
+                                    });
+                                } else {
+                                    // Default string conversion
+                                    displayValue = String(value);
+                                }
+                                return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("dt", {
-                                            className: "text-sm font-medium text-gray-500 dark:text-gray-400 capitalize border-b-2 ",
+                                            className: "text-sm font-medium text-gray-500 dark:text-gray-400 capitalize border-b-2",
                                             children: key.replace(/_/g, " ")
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/[id]/page.tsx",
-                                            lineNumber: 84,
-                                            columnNumber: 17
+                                            lineNumber: 100,
+                                            columnNumber: 9
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("dd", {
                                             className: "mt-1 text-sm text-gray-900 dark:text-gray-200 dark:bg-gray-600 bg-gray-100 rounded-lg p-2",
-                                            children: String(value)
+                                            children: displayValue
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/[id]/page.tsx",
-                                            lineNumber: 87,
-                                            columnNumber: 17
+                                            lineNumber: 103,
+                                            columnNumber: 9
                                         }, this)
                                     ]
                                 }, key, true, {
                                     fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/[id]/page.tsx",
-                                    lineNumber: 83,
-                                    columnNumber: 15
-                                }, this))
+                                    lineNumber: 99,
+                                    columnNumber: 7
+                                }, this);
+                            })
                         }, void 0, false, {
                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/[id]/page.tsx",
-                            lineNumber: 81,
-                            columnNumber: 11
+                            lineNumber: 82,
+                            columnNumber: 1
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$components$2f$ui$2f$separator$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Separator"], {
                             className: "my-4"
                         }, void 0, false, {
                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/[id]/page.tsx",
-                            lineNumber: 94,
+                            lineNumber: 112,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$components$2f$ui$2f$item$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["ItemActions"], {
@@ -601,12 +644,12 @@ async function TransactionPage({ params }) {
                                         children: "Edit"
                                     }, void 0, false, {
                                         fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/[id]/page.tsx",
-                                        lineNumber: 98,
+                                        lineNumber: 116,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/[id]/page.tsx",
-                                    lineNumber: 97,
+                                    lineNumber: 115,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Button"], {
@@ -617,18 +660,18 @@ async function TransactionPage({ params }) {
                                         children: "Back to Transactions"
                                     }, void 0, false, {
                                         fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/[id]/page.tsx",
-                                        lineNumber: 106,
+                                        lineNumber: 124,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/[id]/page.tsx",
-                                    lineNumber: 105,
+                                    lineNumber: 123,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/[id]/page.tsx",
-                            lineNumber: 96,
+                            lineNumber: 114,
                             columnNumber: 11
                         }, this)
                     ]

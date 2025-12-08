@@ -124,13 +124,13 @@ export default function TransactionsTable() {
   }, [tableData.transactions.length, page, tableData.loading]);
 
   return (
-    <div className="max-h-[600px] overflow-scroll max-w-lg lg:max-w-3xl md:max-w-2xl sm:max-w-xl  bg-[#f5f6fb] dark:bg-[#0c1017] pt-0 p-5 pb-0 mt-4 rounded-lg border border-gray-300 dark:border-gray-600 shadow-md shadow-gray-500 dark:shadow-gray-800 no-scrollbar">
-      <div className="sticky top-0 z-2 flex items-center justify-between pt-4 pb-4 bg-[#f5f6fb] dark:bg-[#0c1017]">
+    <div className="max-h-[600px] overflow-scroll max-w-md lg:max-w-3xl md:max-w-2xl sm:max-w-xl  bg-[#f5f6fb] dark:bg-[#0c1017] py-0 p-5 md:ml-5  rounded-lg border border-gray-300 dark:border-gray-600 shadow-md shadow-gray-500 dark:shadow-gray-800 no-scrollbar">
+      <div className="sticky top-0 z-20 flex items-center justify-between py-4 px-1 bg-[#f5f6fb] dark:bg-[#0c1017]">
         <span className="sm:flex items-start justify-between text-md sm:text-lg md:text-xl hidden  font-bold">
           Transactions
         </span>
-        <div className="flex items-center  gap-4 md:gap-2">
-          <div className="flex items-center gap-2">
+        <div className="flex items-center  gap-3 sm:gap-6">
+          <div className="flex items-center gap-2 sm:gap-4">
             <select
               value={filters.type || ""}
               onChange={(e) =>
@@ -196,7 +196,7 @@ export default function TransactionsTable() {
         <TableHeader>
           <TableRow>
             <TableHead
-              className="cursor-pointer"
+              className="cursor-pointer md:text-md sm:text-sm text-xs font-semibold"
               onClick={() => handleSort("date")}
             >
               Date{" "}
@@ -206,11 +206,11 @@ export default function TransactionsTable() {
                   : "▼"
                 : ""}
             </TableHead>
-            <TableHead>Category</TableHead>
-            <TableHead>Description</TableHead>
-            <TableHead>Type</TableHead>
+            <TableHead className="md:text-md sm:text-sm text-xs font-semibold">Category</TableHead>
+            <TableHead className="md:text-md sm:text-sm text-xs font-semibold">Description</TableHead>
+            <TableHead className="md:text-md sm:text-sm text-xs font-semibold">Type</TableHead>
             <TableHead
-              className="text-center cursor-pointer"
+              className="text-left sm:text-center cursor-pointer md:text-md sm:text-sm text-xs font-semibold"
               onClick={() => handleSort("amount")}
             >
               Sum{" "}
@@ -220,7 +220,7 @@ export default function TransactionsTable() {
                   : "▼"
                 : ""}
             </TableHead>
-            <TableHead>Actions</TableHead>
+            <TableHead className="md:text-md sm:text-sm text-xs font-semibold">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -240,23 +240,23 @@ export default function TransactionsTable() {
             tableData.transactions.map((op) => (
               <TableRow
                 key={op.id}
-                className="group hover:bg-gray-300 dark:hover:bg-gray-900 cursor-pointer"
+                className="group hover:bg-gray-300 dark:hover:bg-gray-900 cursor-pointer gap-0"
                 onClick={() => router.push(`/users/${op.id}`)}
                 //   <Link href={`/users/${op.id}/edit`} passHref>
               >
-                <TableCell>
+                <TableCell className=" text-left text-xs sm:text-sm md:text-md min-w-15 max-w-22 sm:min-w-25 sm:max-w-30 md:min-w-30 md:max-w-45">
                   {new Date(op.date).toLocaleDateString("ru-RU")}
                 </TableCell>
-                <TableCell className="text-xs md:text-sm min-w-20 max-w-25 sm:min-w-25 sm:max-w-30 md:min-w-30 md:max-w-45">{getCategoryName(op.category)}</TableCell>
-                <TableCell className="overflow-scroll text-xs md:text-sm min-w-20 max-w-25 sm:min-w-25 sm:max-w-30 md:min-w-30 md:max-w-45">
+                <TableCell className="text-xs sm:text-sm md:text-md min-w-18 max-w-25 sm:min-w-25 sm:max-w-30 md:min-w-30 md:max-w-45">{getCategoryName(op.category)}</TableCell>
+                <TableCell className="overflow-scroll text-xs sm:text-sm md:text-md min-w-20 max-w-25 sm:min-w-25 sm:max-w-30 md:min-w-30 md:max-w-45">
                   {op.description}
                 </TableCell>
-                <TableCell>
+                <TableCell className="md:text-md sm:text-sm text-xs font-semibold">
                   {op.type === "expense" || op.type === "expence"
-                    ? "Расход"
-                    : "Доход"}
+                    ? "Expence"
+                    : "Income"}
                 </TableCell>
-                <TableCell className="text-right md:min-w-30 min-w-15 md:max-w-40 max-w-25 overflow-scroll">
+                <TableCell className="text-left text-xs sm:text-sm md:text-md min-w-20 max-w-25 sm:min-w-25 sm:max-w-30 md:min-w-30 md:max-w-45 overflow-scroll">
                   <span
                     className={
                       op.type === "expense" || op.type === "expence"
@@ -269,7 +269,7 @@ export default function TransactionsTable() {
                   </span>
                 </TableCell>
                 <TableCell>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center md:gap-2 sm:gap-1 gap-0.5">
                     <Link href={`/users/${op.id}/edit`} passHref>
                       <Button
                         variant="ghost"
@@ -303,7 +303,7 @@ export default function TransactionsTable() {
         </TableBody>
       </Table>
 
-      <div className="sticky bottom-0 z-200 flex items-center justify-between mt-4 pt-2 pb-4 bg-[#f5f6fb] dark:bg-[#0c1017]">
+      <div className="sticky bottom-0 z-2 flex items-center justify-between mt-4 pt-2 pb-4 px-1 bg-[#f5f6fb] dark:bg-[#0c1017]">
         <div className="text-sm text-gray-600">
           Showing {tableData.transactions.length} of {tableData.totalItems}{" "}
           transactions

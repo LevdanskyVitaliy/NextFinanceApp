@@ -21,7 +21,7 @@ export default async function TransactionPage({
   const api = new Api();
   const categories = await api.getAllCategories();
 
-  const result = await api.getTransactions({ page: 1, limit: 1000 });
+  const result = await api.getTransactions(); 
   const transaction = result.data?.find((tx: any) => String(tx.id) === id);
 
   if (!transaction) {
@@ -74,22 +74,40 @@ export default async function TransactionPage({
             Transaction ID: {transaction.id}
           </ItemTitle>
           <ItemDescription>
-            Date: {new Date(transaction.date).toLocaleDateString()}
+            Date: {new Date(transaction.date).toLocaleDateString("ru-RU")}
           </ItemDescription>
           <Separator className="my-4" />
 
-          <dl className="grid grid-cols-2 gap-x-6 gap-y-3">
-            {Object.entries(displayTransaction).map(([key, value]) => (
-              <div key={key}>
-                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400 capitalize border-b-2 ">
-                  {key.replace(/_/g, " ")}
-                </dt>
-                <dd className="mt-1 text-sm text-gray-900 dark:text-gray-200 dark:bg-gray-600 bg-gray-100 rounded-lg p-2">
-                  {String(value)}
-                </dd>
-              </div>
-            ))}
-          </dl>
+ 
+<dl className="grid grid-cols-2 gap-x-6 gap-y-3">
+  {Object.entries(displayTransaction).map(([key, value]) => {
+    let displayValue: string;
+
+    if (key === "date") {
+      // Format the date string
+      displayValue = new Date(value as string).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
+    } else {
+      // Default string conversion
+      displayValue = String(value);
+    }
+
+    return (
+      <div key={key}>
+        <dt className="text-sm font-medium text-gray-500 dark:text-gray-400 capitalize border-b-2">
+          {key.replace(/_/g, " ")}
+        </dt>
+        <dd className="mt-1 text-sm text-gray-900 dark:text-gray-200 dark:bg-gray-600 bg-gray-100 rounded-lg p-2">
+          {displayValue}
+        </dd>
+      </div>
+    );
+  })}
+</dl>
+
 
           <Separator className="my-4" />
 
@@ -116,3 +134,5 @@ export default async function TransactionPage({
     </div>
   );
 }
+
+

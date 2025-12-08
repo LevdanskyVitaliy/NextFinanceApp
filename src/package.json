@@ -1,0 +1,20 @@
+{
+  "name": "express",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LevdanskyVitaliy/NextFinanceApp.git"
+  },
+  "author": "VLEv",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LevdanskyVitaliy/NextFinanceApp/issues"
+  },
+  "homepage": "https://github.com/LevdanskyVitaliy/NextFinanceApp#readme",
+  "description": ""
+}

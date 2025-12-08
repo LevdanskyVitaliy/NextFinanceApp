@@ -49,7 +49,7 @@ export default function EditForm() {
 
         const [cats, transactionsResult] = await Promise.all([
           api.getAllCategories(),
-          api.getTransactions({ page: 1, limit: 1000 }),
+          api.getTransactions(),
         ]);
 
         setCategories(cats);
@@ -124,7 +124,7 @@ export default function EditForm() {
 
   if (loading) {
     return (
-      <div className="max-w-4xl p-6 border border-gray-300 dark:border-gray-600 dark:text-white bg-[#f5f6fb] dark:bg-[#0c1017] rounded-lg shadow-md shadow-gray-500 dark:shadow-gray-800 mx-auto mt-8">
+      <div className="max-w-4xl p-6 border border-gray-300 dark:border-gray-600 dark:text-white bg-[#f5f6fb] dark:bg-[#0c1017] rounded-lg shadow-md shadow-gray-500 dark:shadow-gray-800 mx-auto sm:mt-8 mt-0">
         <div className="flex justify-center items-center py-8">
           Loading transaction data...
         </div>
@@ -134,7 +134,7 @@ export default function EditForm() {
 
   if (error) {
     return (
-      <div className="max-w-4xl p-6 border border-gray-300 dark:border-gray-600 dark:text-white bg-[#f5f6fb] dark:bg-[#0c1017] rounded-lg shadow-md shadow-gray-500 dark:shadow-gray-800 mx-auto mt-8">
+      <div className="max-w-4xl sm:p-6 p-0 border border-gray-300 dark:border-gray-600 dark:text-white bg-[#f5f6fb] dark:bg-[#0c1017] rounded-lg shadow-md shadow-gray-500 dark:shadow-gray-800 mx-auto mt-8">
         <div className="text-red-600 p-4 text-center">{error}</div>
         <div className="flex justify-center mt-4">
           <Button
@@ -159,20 +159,21 @@ export default function EditForm() {
   }
 
   return (
-    <div className="max-w-4xl p-6 border border-gray-300 dark:border-gray-600  dark:text-white bg-[#f5f6fb] dark:bg-[#0c1017] rounded-lg shadow-md shadow-gray-500 dark:shadow-gray-800">
+    <div className="max-w-4xl sm:p-6 p-2 border border-gray-300 dark:border-gray-600  dark:text-white bg-[#f5f6fb] dark:bg-[#0c1017] rounded-lg shadow-md shadow-gray-500 dark:shadow-gray-800">
       <Item variant="muted">
         <ItemContent>
-          <ItemTitle className="border-b-2 text-xl font-bold pb-2">
+          <ItemTitle className="border-b-2 md:text-xl sm:lext-lg lext-md font-bold sm:pb-2 pb-1 ">
             Edit Transaction ID: {formData.id}
           </ItemTitle>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <Separator className="my-4" />
+          <form onSubmit={handleSubmit} className="sm:space-y-6 space-y-3">
+            <Separator className="my-2" />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 md:gap-6 gap-3">
+              <div className="sm:space-y-6 space-y-3">
                 <div>
                   <Label
+                  id="type"
                     htmlFor="type"
                     className="text-sm font-medium text-gray-500 dark:text-gray-400 capitalize border-b-2 block pb-1"
                   >
@@ -194,8 +195,9 @@ export default function EditForm() {
 
                 <div>
                   <Label
+                  id="amount"
                     htmlFor="amount"
-                    className="text-sm font-medium text-gray-500 dark:text-gray-400 capitalize border-b-2 block pb-1"
+                    className="text-sm font-medium text-gray-500 dark:text-gray-400 capitalize border-b-2 block sm:pb-2 pb-1"
                   >
                     Amount
                   </Label>
@@ -214,8 +216,9 @@ export default function EditForm() {
 
                 <div>
                   <Label
+                  id="category"
                     htmlFor="category"
-                    className="text-sm font-medium text-gray-500 dark:text-gray-400 capitalize border-b-2 block pb-1"
+                    className="text-sm font-medium text-gray-500 dark:text-gray-400 capitalize border-b-2 block sm:pb-2 pb-1"
                   >
                     Category
                   </Label>
@@ -242,8 +245,9 @@ export default function EditForm() {
               <div className="space-y-6">
                 <div>
                   <Label
+                  id="date"
                     htmlFor="date"
-                    className="text-sm font-medium text-gray-500 dark:text-gray-400 capitalize border-b-2 block pb-1"
+                    className="text-sm font-medium text-gray-500 dark:text-gray-400 capitalize border-b-2 block pb-0"
                   >
                     Date
                   </Label>
@@ -260,6 +264,7 @@ export default function EditForm() {
 
                 <div className="md:col-span-1">
                   <Label
+                  id="desc"
                     htmlFor="description"
                     className="text-sm font-medium text-gray-500 dark:text-gray-400 capitalize border-b-2 block pb-1"
                   >

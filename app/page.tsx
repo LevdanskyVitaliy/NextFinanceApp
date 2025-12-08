@@ -27,7 +27,7 @@ export default function Home() {
       <Header />
 
       <main className="flex pt-16 mx-auto ">
-        <div className="lg:hidden flex-start mt-8 z-1000 left-0 top-0 sticky">
+        {/* <div className="lg:hidden flex-start mt-8 z-1000 left-0 top-0 sticky">
           <Button
             className="dark:bg-gray-600 bg-gray-300 p-2 z-1000 dark:border-gray-300 border"
             onClick={() => setShowCreate((v) => !v)}
@@ -37,7 +37,20 @@ export default function Home() {
           >
             {showCreate ? "<" : ">"}
           </Button>
-        </div>
+        </div> */}
+
+<div className="lg:hidden fixed top-27 left-0 z-100">
+  <Button
+    className="dark:bg-gray-600 bg-gray-300 p-2 opacity-35 dark:border-gray-300 border rounded shadow-md"
+    onClick={() => setShowCreate((v) => !v)}
+    aria-label={
+      showCreate ? "Hide Create Transaction" : "Show Create Transaction"
+    }
+  >
+    {showCreate ? "<" : ">"}
+  </Button>
+</div>
+
 
         <div
           className={`
@@ -51,7 +64,7 @@ export default function Home() {
 
         <div
           className={`
-            hidden lg:flex shrink-0 w-72 ml-4 mt-8 shadow-md
+            hidden lg:flex shrink-0 w-72:ml-4 mt-8 shadow-md
             fixed top-16  z-30
           `}
         >
@@ -66,7 +79,7 @@ export default function Home() {
           />
         )}
 
-        <div className="flex-1 flex items-center justify-center lg:ml-70 mt-4">
+        <div className="flex-1 flex items-center justify-center ml-0 lg:ml-70 mt-4">
           <div className="space-y-4">
             <TableTransactions />
           </div>

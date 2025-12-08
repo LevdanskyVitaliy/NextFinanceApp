@@ -104,167 +104,6 @@ function CardFooter({ className, ...props }) {
 "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx [app-ssr] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
-// // "use client";
-// // import { Card, CardContent } from "@/components/ui/card";
-// // import Link from "next/link";
-// // import { useTransactions } from "@/app/contexts/TransactionContext";
-// // export default function TransactionsLayout({
-// //   children,
-// // }: Readonly<{ children: React.ReactNode }>) {
-// //   const { transactions, categories, loading } = useTransactions();
-// //   const getCategoryName = (categoryId: string | number): string => {
-// //     if (!categoryId || !categories.length) return "Uncategorized";
-// //     const category = categories.find(
-// //       (cat) =>
-// //         cat.id == categoryId ||
-// //         String(cat.id) === String(categoryId) ||
-// //         Number(cat.id) === Number(categoryId)
-// //     );
-// //     return category?.name || "Uncategorized";
-// //   };
-// //   const formatDate = (dateString: string) => {
-// //     try {
-// //       return new Date(dateString).toLocaleDateString("en-US", {
-// //         year: "numeric",
-// //         month: "short",
-// //         day: "numeric",
-// //       });
-// //     } catch {
-// //       return "Invalid Date";
-// //     }
-// //   };
-// //   if (loading) {
-// //     return (
-// //       <div className="min-h-screen bg-background">
-// //         <div className="container mx-auto">
-// //           <div className="flex gap-30">
-// //             <div className="xl:w-80 lg:w-60 md:w-40 shrink-0 m-2 ">
-// //               <div className="sticky top-6">
-// //                 <h2 className="text-xl font-bold mb-4 text-foreground">
-// //                   Latest Transactions
-// //                 </h2>
-// //                 <div className="space-y-3 max-h-90vh overflow-y-auto no-scrollbar">
-// //                   {[...Array(5)].map((_, i) => (
-// //                     <Card
-// //                       key={i}
-// //                       className="p-4 border shadow-md bg-[#f5f6fb] dark:bg-[#0c1017] border-gray-300 dark:border-gray-600"
-// //                     >
-// //                       <CardContent className="md:p-4 p-3 ">
-// //                         <div className="space-y-2">
-// //                           <div className="flex justify-between items-start">
-// //                             <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-16 animate-pulse"></div>
-// //                             <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-20 animate-pulse"></div>
-// //                           </div>
-// //                           <div className="h-3 bg-gray-300 dark:bg-gray-600 rounded w-24 animate-pulse"></div>
-// //                           <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-20 animate-pulse"></div>
-// //                         </div>
-// //                       </CardContent>
-// //                     </Card>
-// //                   ))}
-// //                 </div>
-// //               </div>
-// //             </div>
-// //             <main className="mt-11">
-// //               <div className="justify-center items-center">{children}</div>
-// //             </main>
-// //           </div>
-// //         </div>
-// //       </div>
-// //     );
-// //   }
-// //   return (
-// //     <div className="min-h-screen bg-background">
-// //       <div className="container mx-auto">
-// //         <div className="flex gap-10 sm:gap-20 md:gap-30">
-// //           <div className="lg:w-80 shrink-0 ml-4">
-// //             <div className="sticky top-6">
-// //               <h2 className="text-xl font-bold mb-4 text-foreground hidden sm:flex">
-// //                 Latest Transactions
-// //               </h2>
-// //               <div className="flex sm:flex-col space flex-row sm:space-x-0 space-y-0 space-x-3 sm:space-y-3 overflow-x-auto  max-h-[calc(100vh-120px)] overflow-y-auto no-scrollbar">
-// //               {/* <div className="flex sm:flex-col space flex-row sm:space-x-0 space-y-0 space-x-3 sm:space-y-3 overflow-x-auto no-scrollbar"> */}
-// //                 {transactions.length === 0 ? (
-// //                   <Card className="p-4 text-center">
-// //                     <p className="text-muted-foreground">
-// //                       No transactions found
-// //                     </p>
-// //                   </Card>
-// //                 ) : (
-// //                   transactions.map((transaction) => (
-// //                     <Card
-// //                       key={transaction.id}
-// //                       className="hover:bg-accent dark:hover:bg-accent transition-colors duration-200 border shadow-md bg-[#f5f6fb] dark:bg-[#0c1017] border-gray-300 dark:border-gray-600"
-// //                     >
-// //                       <CardContent className="p-4">
-// //                         <Link
-// //                           href={`/users/${transaction.id}`}
-// //                           className="block hover:no-underline group"
-// //                         >
-// //                           <div className="space-y-2">
-// //                             <div className="flex justify-between items-start">
-// //                               <h3 className="font-semibold text-foreground group-hover:text-primary">
-// //                                 #{transaction.id}
-// //                               </h3>
-// //                               <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded">
-// //                                 {getCategoryName(transaction.category)}
-// //                               </span>
-// //                             </div>
-// //                             <div className="text-sm text-muted-foreground">
-// //                               <p className="flex items-center gap-1">
-// //                                 <svg
-// //                                   className="w-3 h-3"
-// //                                   fill="none"
-// //                                   stroke="currentColor"
-// //                                   viewBox="0 0 24 24"
-// //                                 >
-// //                                   <path
-// //                                     strokeLinecap="round"
-// //                                     strokeLinejoin="round"
-// //                                     strokeWidth={2}
-// //                                     d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-// //                                   />
-// //                                 </svg>
-// //                                 {formatDate(transaction.date)}
-// //                               </p>
-// //                             </div>
-// //                             {transaction.amount && (
-// //                               <span
-// //                                 className={
-// //                                   transaction.type === "expense" ||
-// //                                   transaction.type === "expence"
-// //                                     ? "text-red-600 opacity-90"
-// //                                     : "text-green-600 opacity-90"
-// //                                 }
-// //                               >
-// //                                 {transaction.type === "expense" ||
-// //                                 transaction.type === "expence"
-// //                                   ? "-"
-// //                                   : "+"}
-// //                                 {Math.abs(transaction.amount).toFixed(2)} BYN
-// //                               </span>
-// //                             )}
-// //                             {transaction.description && (
-// //                               <p className="text-xs text-muted-foreground truncate">
-// //                                 {transaction.description}
-// //                               </p>
-// //                             )}
-// //                           </div>
-// //                         </Link>
-// //                       </CardContent>
-// //                     </Card>
-// //                   ))
-// //                 )}
-// //               </div>
-// //             </div>
-// //           </div>
-// //           <main className="mt-11 ">
-// //             <div className="justify-center items-center">{children}</div>
-// //           </main>
-// //         </div>
-// //       </div>
-// //     </div>
-// //   );
-// // }
 __turbopack_context__.s([
     "default",
     ()=>TransactionsLayout
@@ -314,7 +153,7 @@ function TransactionsLayout({ children }) {
                                         children: "Latest Transactions"
                                     }, void 0, false, {
                                         fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                        lineNumber: 242,
+                                        lineNumber: 42,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -335,66 +174,66 @@ function TransactionsLayout({ children }) {
                                                                         className: "h-4 bg-gray-300 dark:bg-gray-600 rounded w-16 animate-pulse"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                                                        lineNumber: 254,
+                                                                        lineNumber: 54,
                                                                         columnNumber: 29
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                         className: "h-4 bg-gray-300 dark:bg-gray-600 rounded w-20 animate-pulse"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                                                        lineNumber: 255,
+                                                                        lineNumber: 55,
                                                                         columnNumber: 29
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                                                lineNumber: 253,
+                                                                lineNumber: 53,
                                                                 columnNumber: 27
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                 className: "h-3 bg-gray-300 dark:bg-gray-600 rounded w-24 animate-pulse"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                                                lineNumber: 257,
+                                                                lineNumber: 57,
                                                                 columnNumber: 27
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                 className: "h-4 bg-gray-300 dark:bg-gray-600 rounded w-20 animate-pulse"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                                                lineNumber: 258,
+                                                                lineNumber: 58,
                                                                 columnNumber: 27
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                                        lineNumber: 252,
+                                                        lineNumber: 52,
                                                         columnNumber: 25
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                                    lineNumber: 251,
+                                                    lineNumber: 51,
                                                     columnNumber: 23
                                                 }, this)
                                             }, i, false, {
                                                 fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                                lineNumber: 247,
+                                                lineNumber: 47,
                                                 columnNumber: 21
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                        lineNumber: 245,
+                                        lineNumber: 45,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                lineNumber: 241,
+                                lineNumber: 41,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                            lineNumber: 240,
+                            lineNumber: 40,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -404,28 +243,28 @@ function TransactionsLayout({ children }) {
                                 children: children
                             }, void 0, false, {
                                 fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                lineNumber: 269,
+                                lineNumber: 69,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                            lineNumber: 268,
+                            lineNumber: 68,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                    lineNumber: 239,
+                    lineNumber: 39,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                lineNumber: 237,
+                lineNumber: 37,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-            lineNumber: 236,
+            lineNumber: 36,
             columnNumber: 7
         }, this);
     }
@@ -446,7 +285,7 @@ function TransactionsLayout({ children }) {
                                     children: "Latest Transactions"
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                    lineNumber: 284,
+                                    lineNumber: 84,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -458,12 +297,12 @@ function TransactionsLayout({ children }) {
                                             children: "No transactions found"
                                         }, void 0, false, {
                                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                            lineNumber: 290,
+                                            lineNumber: 90,
                                             columnNumber: 21
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                        lineNumber: 289,
+                                        lineNumber: 89,
                                         columnNumber: 19
                                     }, this) : transactions.map((transaction)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Card"], {
                                             className: "hover:bg-accent dark:hover:bg-accent transition-colors duration-200 border shadow-md bg-[#f5f6fb] dark:bg-[#0c1017] border-gray-300 dark:border-gray-600",
@@ -486,7 +325,7 @@ function TransactionsLayout({ children }) {
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                                                        lineNumber: 305,
+                                                                        lineNumber: 105,
                                                                         columnNumber: 31
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -494,13 +333,13 @@ function TransactionsLayout({ children }) {
                                                                         children: getCategoryName(transaction.category)
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                                                        lineNumber: 308,
+                                                                        lineNumber: 108,
                                                                         columnNumber: 31
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                                                lineNumber: 304,
+                                                                lineNumber: 104,
                                                                 columnNumber: 29
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -520,24 +359,24 @@ function TransactionsLayout({ children }) {
                                                                                 d: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                                                                lineNumber: 320,
+                                                                                lineNumber: 120,
                                                                                 columnNumber: 35
                                                                             }, this)
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                                                            lineNumber: 314,
+                                                                            lineNumber: 114,
                                                                             columnNumber: 33
                                                                         }, this),
                                                                         formatDate(transaction.date)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                                                    lineNumber: 313,
+                                                                    lineNumber: 113,
                                                                     columnNumber: 31
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                                                lineNumber: 312,
+                                                                lineNumber: 112,
                                                                 columnNumber: 29
                                                             }, this),
                                                             transaction.amount && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -549,7 +388,7 @@ function TransactionsLayout({ children }) {
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                                                lineNumber: 331,
+                                                                lineNumber: 131,
                                                                 columnNumber: 31
                                                             }, this),
                                                             transaction.description && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -557,75 +396,75 @@ function TransactionsLayout({ children }) {
                                                                 children: transaction.description
                                                             }, void 0, false, {
                                                                 fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                                                lineNumber: 347,
+                                                                lineNumber: 147,
                                                                 columnNumber: 31
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                                        lineNumber: 303,
+                                                        lineNumber: 103,
                                                         columnNumber: 27
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                                    lineNumber: 299,
+                                                    lineNumber: 99,
                                                     columnNumber: 25
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                                lineNumber: 298,
+                                                lineNumber: 98,
                                                 columnNumber: 23
                                             }, this)
                                         }, transaction.id, false, {
                                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                            lineNumber: 294,
+                                            lineNumber: 94,
                                             columnNumber: 21
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                                    lineNumber: 287,
+                                    lineNumber: 87,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                            lineNumber: 283,
+                            lineNumber: 83,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                        lineNumber: 282,
+                        lineNumber: 82,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
-                        className: " sm:mt-11  flex-1 m-5",
+                        className: " sm:mt-6 mt-0  flex-1 m-5 ",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$NextFinanceApp$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "justify-center items-center",
                             children: children
                         }, void 0, false, {
                             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                            lineNumber: 363,
+                            lineNumber: 163,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                        lineNumber: 362,
+                        lineNumber: 162,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-                lineNumber: 281,
+                lineNumber: 81,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-            lineNumber: 279,
+            lineNumber: 79,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/Documents/GitHub/NextFinanceApp/app/(auth)/users/layout.tsx",
-        lineNumber: 278,
+        lineNumber: 78,
         columnNumber: 5
     }, this);
 }

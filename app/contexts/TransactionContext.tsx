@@ -129,7 +129,6 @@ export function TransactionProvider({ children }: { children: ReactNode }) {
       const [transactionsResult, categoriesResult] = await Promise.all([
         api.getTransactions({
           page: 1,
-          limit: 10000,
           sort: { field: "date", direction: "desc" },
         }),
         api.getAllCategories(),
