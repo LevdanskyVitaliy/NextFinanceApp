@@ -1,8 +1,32 @@
-[00:00:04.858] Server  LOG      ✓ Ready in 3.8s
-[00:00:07.960] Server  LOG      ○ Compiling / ...
-[00:11:59.934] Server  LOG      ✓ Compiled in 979ms
-[00:28:25.356] Server  LOG      ✓ Compiled in 1057ms
-[00:29:19.809] Server  LOG      ✓ Compiled in 269ms
-[00:29:27.545] Server  LOG      ✓ Compiled in 495ms
-[00:31:08.844] Server  LOG      ✓ Compiled in 549ms
-[00:31:27.706] Server  LOG      ○ Compiling /_not-found/page ...
+[00:00:03.402] Server  LOG      ✓ Ready in 2.6s
+[00:00:09.602] Server  LOG      ○ Compiling / ...
+[00:01:37.034] Server  LOG      ✓ Compiled in 347ms
+[00:01:41.301] Server  LOG      ✓ Compiled in 143ms
+[00:01:47.019] Server  LOG      ✓ Compiled in 86ms
+[00:02:03.865] Server  LOG      ✓ Compiled in 213ms
+[00:02:12.395] Server  LOG      ✓ Compiled in 88ms
+[00:03:18.714] Server  LOG      ✓ Compiled in 296ms
+[00:03:25.357] Server  LOG      ✓ Compiled in 152ms
+[00:04:15.600] Server  LOG      ✓ Compiled in 154ms
+[00:04:35.177] Server  LOG      ✓ Compiled in 108ms
+[00:05:01.351] Server  LOG      ✓ Compiled in 334ms
+[00:05:11.098] Server  LOG      ✓ Compiled in 370ms
+[00:05:18.323] Server  LOG      ✓ Compiled in 286ms
+[01:01:37.032] Server  LOG      ✓ Compiled in 1200ms
+[01:01:58.402] Server  LOG      ✓ Compiled in 302ms
+[01:02:09.980] Server  LOG      ✓ Compiled in 276ms
+[01:02:18.098] Server  LOG      ✓ Compiled in 102ms
+[01:02:25.773] Server  LOG      ✓ Compiled in 198ms
+[01:05:26.181] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[01:05:26.237] Server  LOG      ✓ Compiled in 259ms
+[01:11:53.779] Browser LOG     Fetching transaction with ID: 4fd9
+[01:11:53.779] Browser LOG     Transaction found: {"amount":1,"category":"1","date":"2025-12-07","description":"jioh","id":"4fd9","type":"expense"}
+[01:21:49.985] Server  LOG      ✓ Compiled in 220ms
+[01:21:49.994] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[01:26:57.177] Server  LOG      ✓ Compiled in 276ms
+[01:29:36.997] Server  LOG      ✓ Compiled in 230ms
+[01:29:37.156] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[01:29:37.416] Server  LOG      ✓ Compiled in 0ms
+[01:33:32.561] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./Documents/GitHub/NextFinanceApp/app/services/logic.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[01:33:33.593] Server  LOG      ✓ Compiled in 376ms
+[04:21:26.835] Server  LOG      ✓ Compiled in 265ms

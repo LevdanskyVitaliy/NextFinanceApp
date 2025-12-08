@@ -122,7 +122,7 @@ export default function CreateTransaction() {
   return (
     <Card className="max-w-lg sm:max-w-xs mx-auto p-2 z-10 sm:p-4 bg-[#f5f6fb] dark:bg-[#0c1017] rounded-lg shadow-md shadow-gray-500 dark:shadow-gray-800 border-gray-300 dark:border-gray-600">
       <CardHeader>
-        <CardTitle className="text-lg sm:text-xl pt-2">
+        <CardTitle className="text-lg sm:text-xl">
           Create New Operation
         </CardTitle>
       </CardHeader>

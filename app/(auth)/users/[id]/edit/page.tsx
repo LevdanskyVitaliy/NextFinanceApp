@@ -49,14 +49,13 @@ export default function EditForm() {
 
         const [cats, transactionsResult] = await Promise.all([
           api.getAllCategories(),
-          api.getTransactions(),
+          api.getTransactionById(id),
+          // api.getTransactions()
         ]);
 
         setCategories(cats);
 
-        const tx = transactionsResult.data?.find(
-          (t: Transaction) => String(t.id) === id
-        );
+        const tx = transactionsResult
 
         if (!tx) {
           setError(`Transaction with ID ${id} not found`);

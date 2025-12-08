@@ -26,18 +26,7 @@ export default function Home() {
     <div className="min-h-screen ">
       <Header />
 
-      <main className="flex pt-16 mx-auto ">
-        {/* <div className="lg:hidden flex-start mt-8 z-1000 left-0 top-0 sticky">
-          <Button
-            className="dark:bg-gray-600 bg-gray-300 p-2 z-1000 dark:border-gray-300 border"
-            onClick={() => setShowCreate((v) => !v)}
-            aria-label={
-              showCreate ? "Hide Create Transaction" : "Show Create Transaction"
-            }
-          >
-            {showCreate ? "<" : ">"}
-          </Button>
-        </div> */}
+<main className="flex pt-16 mx-auto ">
 
 <div className="lg:hidden fixed top-27 left-0 z-100">
   <Button
@@ -54,7 +43,7 @@ export default function Home() {
 
         <div
           className={`
-    fixed lg:hidden shrink-0 w-72 mt-8 shadow-md top-16 left-0 h-[calc(100vh-10rem)] z-50
+    fixed lg:hidden shrink-0 w-72 mt-4 shadow-md top-16 left-0 h-[calc(100vh-10rem)] z-50
     transition-transform duration-300 ease-in-out
     ${showCreate ? "translate-x-0" : "-translate-x-full"}
   `}
@@ -64,8 +53,8 @@ export default function Home() {
 
         <div
           className={`
-            hidden lg:flex shrink-0 w-72:ml-4 mt-8 shadow-md
-            fixed top-16  z-30
+            hidden lg:flex shrink-0 w-50:ml-4 mt-4 shadow-md
+            fixed top-16 left-5  z-30
           `}
         >
           <CreateTransaction />

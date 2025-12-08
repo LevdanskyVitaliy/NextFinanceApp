@@ -468,7 +468,7 @@ export default function TransactionsTable() {
   return (
     <div className="max-h-[600px] overflow-scroll max-w-md lg:max-w-3xl md:max-w-2xl sm:max-w-xl  bg-[#f5f6fb] dark:bg-[#0c1017] py-0 p-5 md:ml-5  rounded-lg border border-gray-300 dark:border-gray-600 shadow-md shadow-gray-500 dark:shadow-gray-800 no-scrollbar">
       <div className="sticky top-0 z-20 flex items-center justify-between py-4 px-1 bg-[#f5f6fb] dark:bg-[#0c1017]">
-        <span className="sm:flex items-start justify-between text-md sm:text-lg md:text-xl hidden  font-bold">
+        <span className="sm:flex items-start justify-between text-md sm:text-lg lg:text-xl hidden  font-bold">
           Transactions
         </span>
         <div className="flex items-center  gap-3 ">
@@ -542,7 +542,7 @@ export default function TransactionsTable() {
         </div>
       </div>
 
-      <Table className="max-w-md md:max-w-xl">
+      <Table className="max-w-md sm:max-w-lg md:max-w-xl">
         <TableHeader>
           <TableRow>
             <TableHead

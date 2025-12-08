@@ -240,19 +240,16 @@ class Api {
   // async getTransactions(params: Params = {}): Promise<PaginatedTransactions> {
   //   const {
   //     page = 1,
-  //     limit, // optional
+  //     limit = 10000, // Default to 1000 if no limit provided
   //     filters = {},
   //     sort = { field: "", direction: "desc" },
   //   } = params;
   
   //   const query = new URLSearchParams({
   //     _page: page.toString(),
+  //     _per_page: limit.toString(), 
   //     ...filters,
   //   });
-  
-  //   if (limit) {
-  //     query.set("_per_page", limit.toString());
-  //   }
   
   //   if (sort.field) {
   //     query.set(
@@ -263,32 +260,37 @@ class Api {
   
   //   const response = await this.#fetch(`/transactions?${query.toString()}`);
   
-  //   const totalItems = response.items;
-  //   const totalPages = limit ? Math.ceil(totalItems / limit) : 1;
+  //   // Handle both paginated and non-paginated responses from json-server
+  //   const data = Array.isArray(response) ? response : (response.data || response || []);
+  //   const totalItems = response.items || response.length || data.length || 0;
+  //   const totalPages = Math.ceil(totalItems / limit);
   
   //   return {
-  //     data: response.data,
+  //     data,
   //     pages: totalPages,
   //     items: totalItems,
   //     currentPage: page,
-  //     pageSize: limit ?? totalItems, // if no limit, treat as "all"
+  //     pageSize: limit,
   //   };
   // }
-  
 
   async getTransactions(params: Params = {}): Promise<PaginatedTransactions> {
     const {
       page = 1,
-      limit = 10000, // Default to 1000 if no limit provided
+      limit = 10000, // optional
       filters = {},
       sort = { field: "", direction: "desc" },
     } = params;
   
     const query = new URLSearchParams({
       _page: page.toString(),
-      _per_page: limit.toString(), // Always set limit - never omit
       ...filters,
     });
+  
+    // Only add limit if provided
+    if (limit) {
+      query.set("_per_page", limit.toString());
+    }
   
     if (sort.field) {
       query.set(
@@ -300,18 +302,23 @@ class Api {
     const response = await this.#fetch(`/transactions?${query.toString()}`);
   
     // Handle both paginated and non-paginated responses from json-server
-    const data = Array.isArray(response) ? response : (response.data || response || []);
-    const totalItems = response.items || response.length || data.length || 0;
-    const totalPages = Math.ceil(totalItems / limit);
+    const data = Array.isArray(response)
+      ? response
+      : (response.data || response || []);
+    const totalItems =
+      response.items || response.length || data.length || 0;
+  
+    const totalPages = limit ? Math.ceil(totalItems / limit) : 1;
   
     return {
       data,
       pages: totalPages,
       items: totalItems,
       currentPage: page,
-      pageSize: limit,
+      pageSize: limit ?? totalItems, // if no limit, treat as "all"
     };
   }
+  
 }
 
 export default Api;

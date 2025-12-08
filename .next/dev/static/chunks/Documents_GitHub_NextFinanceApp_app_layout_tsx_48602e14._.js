@@ -2,8 +2,7 @@
     script: typeof document === "object" ? document.currentScript : undefined,
     chunks: [
   "static/chunks/[root-of-the-server]__f330c51d._.css",
-  "static/chunks/6aa24_next_dist_e86e3398._.js",
-  "static/chunks/Documents_GitHub_NextFinanceApp_app_0e091525._.js"
+  "static/chunks/Documents_GitHub_NextFinanceApp_381e8dfe._.js"
 ],
     source: "dynamic"
 });
