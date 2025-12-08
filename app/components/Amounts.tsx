@@ -41,9 +41,9 @@ export default function AmountsTable() {
   ).length;
 
   return (
-    <div className=" overflow-y-auto max-h-[700px]   ">
-      <div className="grid grid-cols-1 md:grid-row-3 gap-4 md:gap-8  max-w-3xs">
-        <Card className="min-w-50 max-w-2xs bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800">
+    <div className=" overflow-y-auto max-h-[700px]">
+      <div className="grid grid-cols-1 md:grid-row-3 gap-4 md:gap-8 ">
+        <Card className="min-w-40 max-w-3xs bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800 opacity-80">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-green-700 dark:text-green-400">
               Total Income
@@ -60,7 +60,7 @@ export default function AmountsTable() {
           </CardContent>
         </Card>
 
-        <Card className="min-w-40 max-w-2xs bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800">
+        <Card className="min-w-40 max-w-3xs bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800  opacity-80">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-red-700 dark:text-red-400">
               Total Expenses
@@ -77,7 +77,7 @@ export default function AmountsTable() {
           </CardContent>
         </Card>
 
-        <Card className="min-w-50 max-w-2xs bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800">
+        <Card className="min-w-40  bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800  opacity-80">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-blue-700 dark:text-blue-400">
               Net Balance
@@ -94,7 +94,7 @@ export default function AmountsTable() {
             >
               {totals.total.toFixed(1)} BYN
             </div>
-            <p className="text-xs text-blue-600 dark:text-blue-300">
+            <p className="text-xs md:text-lg text-blue-600 dark:text-blue-300">
               {totals.total >= 0 ? "Positive" : "Negative"} balance
             </p>
           </CardContent>

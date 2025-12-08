@@ -7,11 +7,10 @@ export default function RootLayout({
   return (
       < >
         <Header />
-        <div className='no-scrollbar'>
+        
        <main >{children}</main>
       
-       </div>
-      
+    
     </>
   )
 }

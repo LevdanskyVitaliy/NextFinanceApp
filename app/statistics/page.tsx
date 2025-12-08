@@ -1,7 +1,9 @@
 "use client";
 import AmountsTable from "../components/Amounts";
 import CircularDiagram from "../components/Diagram";
-import { useTransactions } from "../contexts/TransactionContext";
+import MonthlyDiagramCard from "../components/MonthlyGraphs";
+
+
 import {
   ResizableHandle,
   ResizablePanel,
@@ -9,21 +11,21 @@ import {
 } from "@/components/ui/resizable";
 
 export default function ResizableDemo() {
-  const { transactions } = useTransactions();
+ 
 
   return (
-    <div className="min-h-screen w-screen bg-background mt-10">
+    <div className="w-full h-full p-0">
       <ResizablePanelGroup
         direction="horizontal"
-        className="w-full h-full pt-20 md:pt-10"
+        className="w-full h-full md:pt-20 pt-25 "
       >
         <ResizablePanel
           defaultSize={35}
-          minSize={30}
-          maxSize={40}
-          className="min-w-[150px]"
+          minSize={0}
+          maxSize={50}
+          className=""
         >
-          <div className="flex h-full w-full items-center justify-center p-4 bg-muted/50">
+          <div className="flex h-full w-full items-center justify-center p-0  pl-5 bg-muted/50">
             <AmountsTable />
           </div>
         </ResizablePanel>
@@ -33,10 +35,11 @@ export default function ResizableDemo() {
           className="bg-border hover:bg-primary/20 transition-colors"
         />
 
-        <ResizablePanel defaultSize={70} minSize={55} maxSize={75}>
+        <ResizablePanel  
+        defaultSize={65} minSize={50} maxSize={99}  >
           <ResizablePanelGroup direction="vertical">
-            <ResizablePanel defaultSize={70} minSize={60} maxSize={80}>
-              <div className="flex h-full w-full bg-card p-4">
+            <ResizablePanel  defaultSize={55} minSize={0} maxSize={100}>
+              <div className="flex h-full w-full bg-card px-2 ">
                 <CircularDiagram />
               </div>
             </ResizablePanel>
@@ -46,8 +49,8 @@ export default function ResizableDemo() {
               className="bg-border hover:bg-primary/20 transition-colors"
             />
 
-            <ResizablePanel defaultSize={20} minSize={15} maxSize={40}>
-              <div className="flex h-full items-center justify-center p-4 bg-muted/30">
+            <ResizablePanel defaultSize={45} minSize={0} maxSize={100} >
+              {/* <div className="flex h-full items-center justify-center p-4 bg-muted/30">
                 <div className="text-center">
                   <span className="font-semibold text-lg">
                     Transactions Summary
@@ -77,7 +80,10 @@ export default function ResizableDemo() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
+              <div className="flex h-full w-full bg-card px-2 ">
+               <MonthlyDiagramCard />
+               </div>
             </ResizablePanel>
           </ResizablePanelGroup>
         </ResizablePanel>

@@ -96,7 +96,7 @@ export default function CircularDiagram() {
   const totalAmount = categoryData.reduce((sum, item) => sum + item.value, 0);
 
   return (
-    <Card className="overflow-hidden w-full h-full max-w-none border rounded-lg border-gray-300 dark:border-gray-600 shadow-md shadow-gray-500 dark:shadow-gray-800 bg-[#f5f6fb] dark:bg-[#0c1017] sm:p-5 p-1 pt-1 sm:pt-3">
+    <Card className="overflow-hidden w-full h-full max-w-none border rounded-lg border-gray-300 dark:border-gray-600 shadow-md shadow-gray-500 dark:shadow-gray-800 bg-[#f5f6fb] dark:bg-[#0c1017] sm:p-3 p-1 pt-1  pt-2 sm:pt-3">
       <CardHeader className="flex md:flex-row flex-col items-center justify-between px-5 gap-2">
         <CardTitle className="text-md md:text-lg font-semibold flex items-center gap-2">
           {diagramType === "expense"
@@ -125,7 +125,7 @@ export default function CircularDiagram() {
 
       <CardContent className="h-[450px]">
         {categoryData.length > 0 ? (
-          <div className="flex flex-col lg:flex-row items-center justify-between h-full lg:mb-0 mb-30">
+          <div className="flex flex-col lg:flex-row items-center justify-between h-full lg:mb-0 mb-35">
             <div className="w-full h-full">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -156,7 +156,7 @@ export default function CircularDiagram() {
                   Total {diagramType}
                 </div>
               </div>
-              <div className="space-y-2 max-h-48 overflow-y-auto">
+              <div className="space-y-2 max-h-60 sm:max-h-40 overflow-y-auto">
                 {categoryData.map((category, index) => (
                   <div
                     key={index}
