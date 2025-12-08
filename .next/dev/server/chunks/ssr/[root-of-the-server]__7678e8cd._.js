@@ -167,9 +167,39 @@ class Api {
         }
         return await response.json();
     };
-    // FIXED: Now properly returns PaginatedTransactions with correct structure
+    // async getTransactions(params: Params = {}): Promise<PaginatedTransactions> {
+    //   const {
+    //     page = 1,
+    //     limit, // optional
+    //     filters = {},
+    //     sort = { field: "", direction: "desc" },
+    //   } = params;
+    //   const query = new URLSearchParams({
+    //     _page: page.toString(),
+    //     ...filters,
+    //   });
+    //   if (limit) {
+    //     query.set("_per_page", limit.toString());
+    //   }
+    //   if (sort.field) {
+    //     query.set(
+    //       "_sort",
+    //       sort.direction === "desc" ? `-${sort.field}` : sort.field
+    //     );
+    //   }
+    //   const response = await this.#fetch(`/transactions?${query.toString()}`);
+    //   const totalItems = response.items;
+    //   const totalPages = limit ? Math.ceil(totalItems / limit) : 1;
+    //   return {
+    //     data: response.data,
+    //     pages: totalPages,
+    //     items: totalItems,
+    //     currentPage: page,
+    //     pageSize: limit ?? totalItems, // if no limit, treat as "all"
+    //   };
+    // }
     async getTransactions(params = {}) {
-        const { page = 1, limit = 10, filters = {}, sort = {
+        const { page = 1, limit = 10000, filters = {}, sort = {
             field: "",
             direction: "desc"
         } } = params;
@@ -182,11 +212,12 @@ class Api {
             query.set("_sort", sort.direction === "desc" ? `-${sort.field}` : sort.field);
         }
         const response = await this.#fetch(`/transactions?${query.toString()}`);
-        // const data = Array.isArray(response) ? response : [];
-        const totalItems = response.items;
+        // Handle both paginated and non-paginated responses from json-server
+        const data = Array.isArray(response) ? response : response.data || response || [];
+        const totalItems = response.items || response.length || data.length || 0;
         const totalPages = Math.ceil(totalItems / limit);
         return {
-            data: response.data,
+            data,
             pages: totalPages,
             items: totalItems,
             currentPage: page,
@@ -286,7 +317,6 @@ function TransactionProvider({ children }) {
             const [transactionsResult, categoriesResult] = await Promise.all([
                 api.getTransactions({
                     page: 1,
-                    limit: 10000,
                     sort: {
                         field: "date",
                         direction: "desc"
@@ -393,7 +423,7 @@ function TransactionProvider({ children }) {
         children: children
     }, void 0, false, {
         fileName: "[project]/Documents/GitHub/NextFinanceApp/app/contexts/TransactionContext.tsx",
-        lineNumber: 229,
+        lineNumber: 228,
         columnNumber: 5
     }, this);
 }

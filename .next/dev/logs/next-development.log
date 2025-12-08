@@ -1,2 +1,8 @@
-[00:00:05.483] Server  LOG      ✓ Ready in 3.8s
-[00:00:08.590] Server  LOG      ○ Compiling /users/[id] ...
+[00:00:04.858] Server  LOG      ✓ Ready in 3.8s
+[00:00:07.960] Server  LOG      ○ Compiling / ...
+[00:11:59.934] Server  LOG      ✓ Compiled in 979ms
+[00:28:25.356] Server  LOG      ✓ Compiled in 1057ms
+[00:29:19.809] Server  LOG      ✓ Compiled in 269ms
+[00:29:27.545] Server  LOG      ✓ Compiled in 495ms
+[00:31:08.844] Server  LOG      ✓ Compiled in 549ms
+[00:31:27.706] Server  LOG      ○ Compiling /_not-found/page ...

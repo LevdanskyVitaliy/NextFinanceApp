@@ -1035,10 +1035,6 @@
     min-width: calc(var(--spacing) * 15);
   }
 
-  .min-w-18 {
-    min-width: calc(var(--spacing) * 18);
-  }
-
   .min-w-20 {
     min-width: calc(var(--spacing) * 20);
   }
