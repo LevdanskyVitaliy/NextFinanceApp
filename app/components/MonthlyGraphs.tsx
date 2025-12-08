@@ -16,24 +16,6 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { TooltipProps } from "recharts";
-
-function CustomTooltip({ active, payload, label }: TooltipProps<any, any>) {
-  
-    return (
-      <div className="bg-[#f5f6fb] dark:bg-[#0c1017] dark:text-white text-gray-700 rounded-md p-2 shadow-md">
-        <p className="font-semibold">{label}</p>
-        {payload.map((entry, index) => (
-          <p key={index} className="text-sm">
-            {entry.name}: {Number(entry.value).toFixed(2)}
-          </p>
-        ))}
-      </div>
-    );
-  }
-  
-
-
 
 export default function MonthlyDiagramCard() {
   const { transactions } = useTransactions();
@@ -117,7 +99,7 @@ export default function MonthlyDiagramCard() {
           <BarChart data={visibleData} >
             <XAxis dataKey="month" />
             <YAxis />
-            <Tooltip content={CustomTooltip}  />
+            <Tooltip formatter={tooltipFormatter} />
             <Bar dataKey="income" fill="#16a34a" name="Income" color="bg-muted/90" />
             <Bar dataKey="expense" fill="#dc2626" name="Expenses" />
           </BarChart>
