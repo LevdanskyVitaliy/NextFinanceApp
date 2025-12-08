@@ -59,7 +59,7 @@ export default function EditForm() {
 
         if (!tx) {
           setError(`Transaction with ID ${id} not found`);
-          console.log("Available transactions:", transactionsResult.data);
+        
         } else {
           const formattedTransaction = {
             ...tx,
