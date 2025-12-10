@@ -1,20 +1,19 @@
 {
-  "name": "express",
+  "name": "finance-api",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "npm start"
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "seed": "node db/seed.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/LevdanskyVitaliy/NextFinanceApp.git"
+  "dependencies": {
+    "better-sqlite3": "^11.6.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.0"
   },
   "author": "VLEv",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/LevdanskyVitaliy/NextFinanceApp/issues"
-  },
-  "homepage": "https://github.com/LevdanskyVitaliy/NextFinanceApp#readme",
-  "description": ""
+  "description": "Finance tracker API"
 }

@@ -178,7 +178,8 @@ export interface PaginatedTransactions {
 }
 
 class Api {
-  #baseURL = "http://localhost:3000";
+  // URL бэкенда: берём из env или fallback на localhost для локальной разработки
+  #baseURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
   #categoriesCache: Category[] | null = null;
 
   async #fetch(path: string, options?: RequestInit): Promise<any> {
@@ -225,15 +226,7 @@ class Api {
     });
 
   getTransactionById = async (id: string | number): Promise<Transaction> => {
-    const response = await fetch(`${this.#baseURL}/transactions/${id}`);
-    if (!response.ok) {
-      if (response.status === 404) {
-        throw new Error(`Transaction with id ${id} not found`);
-      }
-      const text = await response.text();
-      throw new Error(`HTTP error ${response.status}: ${text}`);
-    }
-    return await response.json();
+    return this.#fetch(`/transactions/${id}`);
   };
 
 
@@ -279,37 +272,33 @@ class Api {
   async getTransactions(params: Params = {}): Promise<PaginatedTransactions> {
     const {
       page = 1,
-      limit = 10000, // Default to 1000 if no limit provided
+      limit = 10000,
       filters = {},
       sort = { field: "", direction: "desc" },
     } = params;
-  
+
+    // Формируем query params для нашего Express API
     const query = new URLSearchParams({
-      _page: page.toString(),
-      _per_page: limit.toString(), // Always set limit - never omit
+      page: page.toString(),
+      limit: limit.toString(),
       ...filters,
     });
-  
+
+    // Сортировка
     if (sort.field) {
-      query.set(
-        "_sort",
-        sort.direction === "desc" ? `-${sort.field}` : sort.field
-      );
+      query.set("sort_by", sort.field);
+      query.set("sort_order", sort.direction || "desc");
     }
-  
+
     const response = await this.#fetch(`/transactions?${query.toString()}`);
-  
-    // Handle both paginated and non-paginated responses from json-server
-    const data = Array.isArray(response) ? response : (response.data || response || []);
-    const totalItems = response.items || response.length || data.length || 0;
-    const totalPages = Math.ceil(totalItems / limit);
-  
+
+    // API возвращает { data, items, pages, currentPage, pageSize }
     return {
-      data,
-      pages: totalPages,
-      items: totalItems,
-      currentPage: page,
-      pageSize: limit,
+      data: response.data || [],
+      pages: response.pages,
+      items: response.items,
+      currentPage: response.currentPage,
+      pageSize: response.pageSize,
     };
   }
 }

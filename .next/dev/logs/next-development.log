@@ -1,2 +1,7 @@
-[00:00:05.483] Server  LOG      ✓ Ready in 3.8s
-[00:00:08.590] Server  LOG      ○ Compiling /users/[id] ...
+[00:00:06.626] Server  LOG      ✓ Ready in 5.7s
+[00:07:33.546] Server  LOG      ○ Compiling / ...
+[00:07:36.275] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:36.932] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:37.545] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:43:32.873] Server  LOG      ✓ Compiled in 343ms
+[00:43:41.012] Server  LOG      ✓ Compiled in 128ms

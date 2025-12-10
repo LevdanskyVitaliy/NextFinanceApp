@@ -248,7 +248,7 @@ export default function TransactionsTable() {
                   {new Date(op.date).toLocaleDateString("ru-RU")}
                 </TableCell>
                 <TableCell className="text-xs sm:text-sm md:text-md min-w-18 max-w-25 sm:min-w-25 sm:max-w-30 md:min-w-30 md:max-w-45">{getCategoryName(op.category)}</TableCell>
-                <TableCell className="overflow-scroll text-xs sm:text-sm md:text-md min-w-20 max-w-25 sm:min-w-25 sm:max-w-30 md:min-w-30 md:max-w-45">
+                <TableCell className="truncate text-xs sm:text-sm md:text-md min-w-20 max-w-25 sm:min-w-25 sm:max-w-30 md:min-w-30 md:max-w-45">
                   {op.description}
                 </TableCell>
                 <TableCell className="md:text-md sm:text-sm text-xs font-semibold">
@@ -256,7 +256,7 @@ export default function TransactionsTable() {
                     ? "Expence"
                     : "Income"}
                 </TableCell>
-                <TableCell className="text-left text-xs sm:text-sm md:text-md min-w-20 max-w-25 sm:min-w-25 sm:max-w-30 md:min-w-30 md:max-w-45 overflow-scroll">
+                <TableCell className="text-left text-xs sm:text-sm md:text-md min-w-20 max-w-25 sm:min-w-25 sm:max-w-30 md:min-w-30 md:max-w-45">
                   <span
                     className={
                       op.type === "expense" || op.type === "expence"

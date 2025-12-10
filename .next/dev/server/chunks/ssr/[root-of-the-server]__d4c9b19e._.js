@@ -24,12 +24,119 @@ __turbopack_context__.n(__turbopack_context__.i("[project]/app/(auth)/users/layo
 "[project]/app/services/logic.ts [app-rsc] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
+// export type Transaction = {
+//   id?: string | number;
+//   amount: number;
+//   date: string;
+//   category: string;
+//   description: string;
+//   type: "expense" | "income" | string;
+// };
+// export type SortOptions = {
+//   field: string | null;
+//   direction: "desc" | "asc" | null;
+// };
+// interface Params {
+//   page?: number;
+//   limit?: number;
+//   filters?: Record<string, any>;
+//   sort?: SortOptions;
+// }
+// export type Category = {
+//   id: string | number;
+//   name: string;
+// };
+// class Api {
+//   #baseURL = "http://localhost:3000";
+//   #categoriesCache: Category[] | null = null;
+//   /**
+//    * Internal fetch wrapper that handles errors consistently
+//    * 
+//    * @param path - API endpoint path (e.g., "/transactions" or "/categories")
+//    * @param options - Standard fetch options (method, body, headers, etc.)
+//    * @returns Parsed JSON response
+//    * @throws Error if HTTP response is not ok (status >= 400)
+//    */
+//   async #fetch(path: string, options?: RequestInit): Promise<any> {
+//     const response = await fetch(this.#baseURL + path, options);
+//     if (!response.ok) {
+//       const text = await response.text();
+//       throw new Error(`HTTP error ${response.status}: ${text}`);
+//     }
+//     return await response.json();
+//   }
+//   getAllCategories = async (): Promise<Category[]> => {
+//     if (!this.#categoriesCache) {
+//       const categories = await this.#fetch("/categories");
+//       this.#categoriesCache = Array.isArray(categories) ? categories : [];
+//     }
+//     return this.#categoriesCache;
+//   };
+//   createTransaction = (transaction: Transaction): Promise<Transaction> => {
+//     this.#categoriesCache = null;
+//     return this.#fetch("/transactions", {
+//       method: "POST",
+//       body: JSON.stringify(transaction),
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
+//   };
+//   deleteTransaction = (id: number | string): Promise<void> =>
+//     this.#fetch(`/transactions/${id}`, { method: "DELETE" });
+//   updateTransaction = (
+//     id: number | string,
+//     updates: Partial<Transaction>
+//   ): Promise<Transaction> =>
+//     this.#fetch(`/transactions/${id}`, {
+//       method: "PATCH",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(updates),
+//     });
+//   getTransactionById = async (id: string | number): Promise<Transaction> => {
+//     const response = await fetch(`${this.#baseURL}/transactions/${id}`);
+//     if (!response.ok) {
+//       // Provide user-friendly error for 404
+//       if (response.status === 404) {
+//         throw new Error(`Transaction with id ${id} not found`);
+//       }
+//       const text = await response.text();
+//       throw new Error(`HTTP error ${response.status}: ${text}`);
+//     }
+//     return await response.json();
+//   };
+//   async getTransactions(params: Params = {}): Promise<Transaction> {
+//     const {
+//       page = 1,
+//       limit = 10,
+//       filters = {},
+//       sort = { field: "", direction: "desc" },
+//     } = params;
+//     const query = new URLSearchParams({
+//       _page: page.toString(),
+//       _per_page: limit.toString(),
+//       ...filters, // Spread filters as query params (e.g., { category: "5" } → ?category=5)
+//     });
+//     if (sort.field) {
+//       query.set(
+//         "_sort",
+//         sort.direction === "desc" ? `-${sort.field}` : sort.field
+//       );
+//     }
+//     const result = await this.#fetch(`/transactions?${query.toString()}`);
+//     return { ...result, currentPage: page };
+//   }
+// }
+// export default Api;
 __turbopack_context__.s([
     "default",
     ()=>__TURBOPACK__default__export__
 ]);
 class Api {
-    #baseURL = "http://localhost:3000";
+    // URL бэкенда: берём из env или fallback на localhost для локальной разработки
+    #baseURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
     #categoriesCache = null;
     async #fetch(path, options) {
         const response = await fetch(this.#baseURL + path, options);
@@ -47,11 +154,13 @@ class Api {
         return this.#categoriesCache;
     };
     createTransaction = (transaction)=>{
-        // Should the cache always be cleared? Review if necessary
         this.#categoriesCache = null;
         return this.#fetch("/transactions", {
             method: "POST",
-            body: JSON.stringify(transaction)
+            body: JSON.stringify(transaction),
+            headers: {
+                "Content-Type": "application/json"
+            }
         });
     };
     deleteTransaction = (id)=>this.#fetch(`/transactions/${id}`, {
@@ -65,33 +174,63 @@ class Api {
             body: JSON.stringify(updates)
         });
     getTransactionById = async (id)=>{
-        const response = await fetch(`${this.#baseURL}/transactions/${id}`);
-        if (!response.ok) {
-            if (response.status === 404) {
-                throw new Error(`Transaction with id ${id} not found`);
-            }
-            const text = await response.text();
-            throw new Error(`HTTP error ${response.status}: ${text}`);
-        }
-        return await response.json();
+        return this.#fetch(`/transactions/${id}`);
     };
+    // async getTransactions(params: Params = {}): Promise<PaginatedTransactions> {
+    //   const {
+    //     page = 1,
+    //     limit, // optional
+    //     filters = {},
+    //     sort = { field: "", direction: "desc" },
+    //   } = params;
+    //   const query = new URLSearchParams({
+    //     _page: page.toString(),
+    //     ...filters,
+    //   });
+    //   if (limit) {
+    //     query.set("_per_page", limit.toString());
+    //   }
+    //   if (sort.field) {
+    //     query.set(
+    //       "_sort",
+    //       sort.direction === "desc" ? `-${sort.field}` : sort.field
+    //     );
+    //   }
+    //   const response = await this.#fetch(`/transactions?${query.toString()}`);
+    //   const totalItems = response.items;
+    //   const totalPages = limit ? Math.ceil(totalItems / limit) : 1;
+    //   return {
+    //     data: response.data,
+    //     pages: totalPages,
+    //     items: totalItems,
+    //     currentPage: page,
+    //     pageSize: limit ?? totalItems, // if no limit, treat as "all"
+    //   };
+    // }
     async getTransactions(params = {}) {
-        const { page = 1, limit = 10, filters = {}, sort = {
+        const { page = 1, limit = 10000, filters = {}, sort = {
             field: "",
             direction: "desc"
         } } = params;
+        // Формируем query params для нашего Express API
         const query = new URLSearchParams({
-            _page: page.toString(),
-            _per_page: limit.toString(),
+            page: page.toString(),
+            limit: limit.toString(),
             ...filters
         });
+        // Сортировка
         if (sort.field) {
-            query.set("_sort", sort.direction === "desc" ? `-${sort.field}` : sort.field);
+            query.set("sort_by", sort.field);
+            query.set("sort_order", sort.direction || "desc");
         }
-        const result = await this.#fetch(`/transactions?${query.toString()}`);
+        const response = await this.#fetch(`/transactions?${query.toString()}`);
+        // API возвращает { data, items, pages, currentPage, pageSize }
         return {
-            ...result,
-            currentPage: page
+            data: response.data || [],
+            pages: response.pages,
+            items: response.items,
+            currentPage: response.currentPage,
+            pageSize: response.pageSize
         };
     }
 }
@@ -336,7 +475,9 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$services$2f$logic$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/services/logic.ts [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/button.tsx [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$separator$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/separator.tsx [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$components$2f$noop$2d$head$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/client/components/noop-head.js [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$item$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/item.tsx [app-rsc] (ecmascript)");
+;
 ;
 ;
 ;
@@ -347,11 +488,8 @@ async function TransactionPage({ params }) {
     const { id } = await params;
     const api = new __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$services$2f$logic$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"]();
     const categories = await api.getAllCategories();
-    const result = await api.getTransactions({
-        page: 1,
-        limit: 1000
-    });
-    const transaction = result.data.find((tx)=>String(tx.id) === id);
+    const result = await api.getTransactions();
+    const transaction = result.data?.find((tx)=>String(tx.id) === id);
     if (!transaction) {
         return (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$components$2f$navigation$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["notFound"])();
     }
@@ -363,7 +501,6 @@ async function TransactionPage({ params }) {
         if (!category) {
             category = categories.find((cat)=>String(cat.id) === String(id));
         }
-        // If still not found, try converting both to numbers
         if (!category) {
             const numId = Number(id);
             if (!isNaN(numId)) {
@@ -382,128 +519,167 @@ async function TransactionPage({ params }) {
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "max-w-xl p-6 border border-gray-300 dark:border-gray-600  dark:text-white bg-[#f5f6fb] dark:bg-[#0c1017] rounded-lg shadow-md shadow-gray-500 dark:shadow-gray-800",
-        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$item$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Item"], {
-            variant: "muted",
-            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$item$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["ItemContent"], {
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$components$2f$noop$2d$head$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
                 children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$item$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["ItemTitle"], {
-                        className: "border-b-2 ",
-                        children: [
-                            "Transaction ID: ",
-                            transaction.id
-                        ]
-                    }, void 0, true, {
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("title", {
+                        children: "Transaction Profile | NextFinanceApp"
+                    }, void 0, false, {
+                        fileName: "[project]/app/(auth)/users/[id]/page.tsx",
+                        lineNumber: 68,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("meta", {
+                        name: "description",
+                        content: "Detailed user profile and financial overview."
+                    }, void 0, false, {
                         fileName: "[project]/app/(auth)/users/[id]/page.tsx",
                         lineNumber: 69,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$item$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["ItemDescription"], {
-                        children: [
-                            "Date: ",
-                            new Date(transaction.date).toLocaleDateString()
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/app/(auth)/users/[id]/page.tsx",
-                        lineNumber: 72,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$separator$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Separator"], {
-                        className: "my-4"
-                    }, void 0, false, {
-                        fileName: "[project]/app/(auth)/users/[id]/page.tsx",
-                        lineNumber: 75,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("dl", {
-                        className: "grid grid-cols-2 gap-x-6 gap-y-3",
-                        children: Object.entries(displayTransaction).map(([key, value])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("dt", {
-                                        className: "text-sm font-medium text-gray-500 dark:text-gray-400 capitalize border-b-2 ",
-                                        children: key.replace(/_/g, " ")
-                                    }, void 0, false, {
-                                        fileName: "[project]/app/(auth)/users/[id]/page.tsx",
-                                        lineNumber: 80,
-                                        columnNumber: 17
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("dd", {
-                                        className: "mt-1 text-sm text-gray-900 dark:text-gray-200 dark:bg-gray-600 bg-gray-100 rounded-lg p-2",
-                                        children: String(value)
-                                    }, void 0, false, {
-                                        fileName: "[project]/app/(auth)/users/[id]/page.tsx",
-                                        lineNumber: 83,
-                                        columnNumber: 17
-                                    }, this)
-                                ]
-                            }, key, true, {
-                                fileName: "[project]/app/(auth)/users/[id]/page.tsx",
-                                lineNumber: 79,
-                                columnNumber: 15
-                            }, this))
-                    }, void 0, false, {
-                        fileName: "[project]/app/(auth)/users/[id]/page.tsx",
-                        lineNumber: 77,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$separator$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Separator"], {
-                        className: "my-4"
-                    }, void 0, false, {
-                        fileName: "[project]/app/(auth)/users/[id]/page.tsx",
-                        lineNumber: 90,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$item$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["ItemActions"], {
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Button"], {
-                                asChild: true,
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                                    href: `/users/${transaction.id}/edit`,
-                                    className: " px-4 py-2 rounded-lg border border-gray-400 dark:bg-blue-900 bg-blue-300 hover:bg-blue-400 dark:hover:bg-gray-500",
-                                    children: "Edit"
-                                }, void 0, false, {
-                                    fileName: "[project]/app/(auth)/users/[id]/page.tsx",
-                                    lineNumber: 94,
-                                    columnNumber: 15
-                                }, this)
-                            }, void 0, false, {
-                                fileName: "[project]/app/(auth)/users/[id]/page.tsx",
-                                lineNumber: 93,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Button"], {
-                                asChild: true,
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                                    href: "/",
-                                    className: " px-4 py-2 rounded-lg border border-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700",
-                                    children: "Back to Transactions"
-                                }, void 0, false, {
-                                    fileName: "[project]/app/(auth)/users/[id]/page.tsx",
-                                    lineNumber: 102,
-                                    columnNumber: 15
-                                }, this)
-                            }, void 0, false, {
-                                fileName: "[project]/app/(auth)/users/[id]/page.tsx",
-                                lineNumber: 101,
-                                columnNumber: 13
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/app/(auth)/users/[id]/page.tsx",
-                        lineNumber: 92,
-                        columnNumber: 11
+                        columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(auth)/users/[id]/page.tsx",
-                lineNumber: 68,
-                columnNumber: 9
+                lineNumber: 67,
+                columnNumber: 8
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$item$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Item"], {
+                variant: "muted",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$item$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["ItemContent"], {
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$item$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["ItemTitle"], {
+                            className: "border-b-2 ",
+                            children: [
+                                "Transaction ID: ",
+                                transaction.id
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/app/(auth)/users/[id]/page.tsx",
+                            lineNumber: 73,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$item$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["ItemDescription"], {
+                            children: [
+                                "Date: ",
+                                new Date(transaction.date).toLocaleDateString("ru-RU")
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/app/(auth)/users/[id]/page.tsx",
+                            lineNumber: 76,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$separator$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Separator"], {
+                            className: "my-4"
+                        }, void 0, false, {
+                            fileName: "[project]/app/(auth)/users/[id]/page.tsx",
+                            lineNumber: 79,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("dl", {
+                            className: "grid grid-cols-2 gap-x-6 gap-y-3",
+                            children: Object.entries(displayTransaction).map(([key, value])=>{
+                                let displayValue;
+                                if (key === "date") {
+                                    // Format the date string
+                                    displayValue = new Date(value).toLocaleDateString("en-US", {
+                                        year: "numeric",
+                                        month: "short",
+                                        day: "numeric"
+                                    });
+                                } else {
+                                    // Default string conversion
+                                    displayValue = String(value);
+                                }
+                                return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("dt", {
+                                            className: "text-sm font-medium text-gray-500 dark:text-gray-400 capitalize border-b-2",
+                                            children: key.replace(/_/g, " ")
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(auth)/users/[id]/page.tsx",
+                                            lineNumber: 100,
+                                            columnNumber: 9
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("dd", {
+                                            className: "mt-1 text-sm text-gray-900 dark:text-gray-200 dark:bg-gray-600 bg-gray-100 rounded-lg p-2",
+                                            children: displayValue
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/(auth)/users/[id]/page.tsx",
+                                            lineNumber: 103,
+                                            columnNumber: 9
+                                        }, this)
+                                    ]
+                                }, key, true, {
+                                    fileName: "[project]/app/(auth)/users/[id]/page.tsx",
+                                    lineNumber: 99,
+                                    columnNumber: 7
+                                }, this);
+                            })
+                        }, void 0, false, {
+                            fileName: "[project]/app/(auth)/users/[id]/page.tsx",
+                            lineNumber: 82,
+                            columnNumber: 1
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$separator$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Separator"], {
+                            className: "my-4"
+                        }, void 0, false, {
+                            fileName: "[project]/app/(auth)/users/[id]/page.tsx",
+                            lineNumber: 112,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$item$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["ItemActions"], {
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Button"], {
+                                    asChild: true,
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                                        href: `/users/${transaction.id}/edit`,
+                                        className: " px-4 py-2 rounded-lg border border-gray-400 dark:bg-blue-900 bg-blue-300 hover:bg-blue-400 dark:hover:bg-gray-500",
+                                        children: "Edit"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/(auth)/users/[id]/page.tsx",
+                                        lineNumber: 116,
+                                        columnNumber: 15
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "[project]/app/(auth)/users/[id]/page.tsx",
+                                    lineNumber: 115,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Button"], {
+                                    asChild: true,
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                                        href: "/",
+                                        className: " px-4 py-2 rounded-lg border border-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700",
+                                        children: "Back to Transactions"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/(auth)/users/[id]/page.tsx",
+                                        lineNumber: 124,
+                                        columnNumber: 15
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "[project]/app/(auth)/users/[id]/page.tsx",
+                                    lineNumber: 123,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/app/(auth)/users/[id]/page.tsx",
+                            lineNumber: 114,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/app/(auth)/users/[id]/page.tsx",
+                    lineNumber: 72,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/app/(auth)/users/[id]/page.tsx",
+                lineNumber: 71,
+                columnNumber: 7
             }, this)
-        }, void 0, false, {
-            fileName: "[project]/app/(auth)/users/[id]/page.tsx",
-            lineNumber: 67,
-            columnNumber: 7
-        }, this)
-    }, void 0, false, {
+        ]
+    }, void 0, true, {
         fileName: "[project]/app/(auth)/users/[id]/page.tsx",
         lineNumber: 66,
         columnNumber: 5

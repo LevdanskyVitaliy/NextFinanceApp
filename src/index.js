@@ -1,49 +1,41 @@
 import express from "express";
-import { TransactionsController } from "./src/controller/transactions.controller.js";
-import { InMemoryDB } from "./src/db/in-memory/index.js";
-import { FileDB } from "./src/db/file/index.js";
-import { Sqlite } from "./src/db/sqlite/index.js";
-import { TransactionsService } from "./src/service/transactions.service.js";
+import cors from "cors";
 
-const DB = {
-  transactions: [],
-};
+import { SqliteRepository } from "./db/sqlite/index.js";
+import { TransactionsService } from "./service/transactions.service.js";
+import { CategoriesService } from "./service/categories.service.js";
+import { TransactionsController } from "./controller/transactions.controller.js";
+import { CategoriesController } from "./controller/categories.controller.js";
 
+const PORT = process.env.PORT || 3000;
+
+// Инициализация БД
+const repository = new SqliteRepository("./database.db");
+repository.migrate();
+
+// Сервисы
+const transactionsService = new TransactionsService(repository);
+const categoriesService = new CategoriesService(repository);
+
+// Контроллеры
+const transactionsController = new TransactionsController(transactionsService);
+const categoriesController = new CategoriesController(categoriesService);
+
+// Express app
 const app = express();
 
-app.use("/transactions", new TransactionsController(DB).getRouter());
-// Sync function is not needed, as NodeV22+ supports top level await
+app.use(cors());
+app.use(express.json());
 
-(async function () {
-  // const inMemDB = new InMemoryDB()
-  // inMemDB.createOne({ id: 1, amount: 100 })
-  // const fileDB = new FileDB('./db.json')
-  const sqlite = new Sqlite("./database.db");
-  await sqlite.connectAndMigrate();
+// Routes
+app.use("/transactions", transactionsController.getRouter());
+app.use("/categories", categoriesController.getRouter());
 
-  const transactionsService = new TransactionsService(sqlite);
-  const transactionsController = new TransactionsController(
-    transactionsService
-  );
+// Health check
+app.get("/", (req, res) => {
+  res.json({ status: "ok", endpoints: ["/transactions", "/categories"] });
+});
 
-  const app = express();
-
-  app.use("/transactions", transactionsController.getRouter());
-
-  // Example of multiple middlewares
-  // app.get(
-  //   '/hello',
-  //   (req, res, next) => {
-  //     if (req.query.name) {
-  //       next()
-  //     } else {
-  //       res.status(400).send('Name is required')
-  //     }
-  //   },
-  //   (req, res, next) => res.send(`Hello, ${req.query.name}!`)
-  // )
-
-  app.listen(3000, () => {
-    console.log("Server is running on port 3000");
-  });
-})();
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
