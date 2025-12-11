@@ -14,8 +14,8 @@
 /coverage
 
 # next.js
-# /.next/
-# /out/
+/.next/
+/out/
 
 # production
 /build
@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+src/node_modules/
+src/database.db
+src/database.db-shm
+src/database.db-wal
+src/package-lock.json
