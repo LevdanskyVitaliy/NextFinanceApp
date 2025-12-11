@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "npm run build",
+    "build": "npm install && npm run build",
     "start": "nodemon index.js",
     "test": "node --test **/*.test.js",
     "test:watch": "node --test --watch **/*.test.js"
