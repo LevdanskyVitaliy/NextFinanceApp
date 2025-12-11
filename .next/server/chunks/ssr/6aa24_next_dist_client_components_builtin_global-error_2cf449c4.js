@@ -1,3 +1,0 @@
-module.exports=[33890,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(86366);a.n(d("[project]/Documents/GitHub/NextFinanceApp/node_modules/next/dist/client/components/builtin/global-error.js <module evaluation>"))},92559,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(86366);a.n(d("[project]/Documents/GitHub/NextFinanceApp/node_modules/next/dist/client/components/builtin/global-error.js"))},98181,a=>{"use strict";a.i(33890);var b=a.i(92559);a.n(b)}];
-
-//# sourceMappingURL=6aa24_next_dist_client_components_builtin_global-error_2cf449c4.js.map

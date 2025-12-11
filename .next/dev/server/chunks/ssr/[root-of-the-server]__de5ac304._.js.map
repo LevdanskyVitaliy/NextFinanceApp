@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 26, "column": 0}, "map": {"version":3,"sources":["file:///Users/vitaliylevdansky/Documents/GitHub/NextFinanceApp/app/%28auth%29/users/page.tsx"],"sourcesContent":["export default function Home() {\n  return (\n    <div>\n     <main className=\"items-center justify-center text-lg mt-10 ml-20\"><p>You are on transactions page. </p>\n     <p>Choose a transaction to work with.</p>\n     </main>\n\n    </div>\n  )\n}\n"],"names":[],"mappings":";;;;;;AAAe,SAAS;IACtB,qBACE,uRAAC;kBACA,cAAA,uRAAC;YAAK,WAAU;;8BAAkD,uRAAC;8BAAE;;;;;;8BACrE,uRAAC;8BAAE;;;;;;;;;;;;;;;;;AAKR"}}]
-}

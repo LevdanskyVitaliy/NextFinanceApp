@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 26, "column": 0}, "map": {"version":3,"sources":["file:///Users/vitaliylevdansky/Desktop/PROGRAMMING/prog/my-app-router/my-app/app/%28auth%29/users/page.tsx"],"sourcesContent":["export default function Home() {\n  return (\n    <div>\n     <main className=\" mt-10\">You are on the users page</main>\n\n    </div>\n  )\n}\n"],"names":[],"mappings":";;;;;;AAAe,SAAS;IACtB,qBACE,2PAAC;kBACA,cAAA,2PAAC;YAAK,WAAU;sBAAS;;;;;;;;;;;AAI9B","debugId":null}}]
-}

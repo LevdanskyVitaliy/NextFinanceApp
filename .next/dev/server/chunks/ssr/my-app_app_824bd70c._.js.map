@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///Users/vitaliylevdansky/Desktop/PROGRAMMING/prog/my-app-router/my-app/app/user-data.tsx"],"sourcesContent":["export type User = {\n    id: string\n    name: string\n    phoneNumber: string\n  }\n  \n  export const users: User[] = [\n    { id: '123', name: 'Ivan', phoneNumber: '123123413' },\n    { id: '456', name: 'Oleg', phoneNumber: '12312323123213' },\n    { id: '789', name: 'Petr', phoneNumber: '123123413' },\n  ]"],"names":[],"mappings":";;;;AAMS,MAAM,QAAgB;IAC3B;QAAE,IAAI;QAAO,MAAM;QAAQ,aAAa;IAAY;IACpD;QAAE,IAAI;QAAO,MAAM;QAAQ,aAAa;IAAiB;IACzD;QAAE,IAAI;QAAO,MAAM;QAAQ,aAAa;IAAY;CACrD","debugId":null}}]
-}
