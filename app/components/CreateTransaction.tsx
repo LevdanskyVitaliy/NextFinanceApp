@@ -36,12 +36,6 @@ export default function CreateTransaction() {
   } | null>(null);
 
   useEffect(() => {
-    if (categories.length > 0 && !formData.category) {
-      setFormData((prev) => ({ ...prev, category: String(categories[0].id) }));
-    }
-  }, [categories, formData.category]);
-
-  useEffect(() => {
     if (message) {
       const timer = setTimeout(() => {
         setMessage(null);
@@ -54,7 +48,6 @@ export default function CreateTransaction() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    // Prevent submission if amount is 0
     if (formData.amount === 0) {
       setMessage({
         type: "error",
@@ -86,10 +79,10 @@ export default function CreateTransaction() {
 
       await refreshData();
 
-      // Reset form but keep first category selected
+     
       setFormData({
         amount: 0,
-        category: categories.length > 0 ? String(categories[0].id) : "",
+        category:  "",
         description: "",
         type: "expense",
         date: new Date().toISOString().split("T")[0],

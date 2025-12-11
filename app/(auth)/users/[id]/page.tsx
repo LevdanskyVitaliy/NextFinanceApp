@@ -20,43 +20,30 @@ export default async function TransactionPage({
   const { id } = await params;
   const api = new Api();
   const categories = await api.getAllCategories();
-
-  // const result = await api.getTransactions({page: 1, limit: 1000}); 
   const transaction = await api.getTransactionById(id)
-  // const transaction = result.data?.find((tx: any) => String(tx.id) === id);
+
 
   if (!transaction) {
     return notFound();
   }
 
-  function getCategoryName(id: string | number): string {
-    if (!categories.length) {
-      return "Unknown";
+ 
+  const getCategoryName = (idOrName: string | number): string => {
+  
+    if (typeof idOrName === "string" && isNaN(Number(idOrName))) {
+      return idOrName || "Unknown";
     }
+  
+    
+    if (!categories.length) return "Unknown";
+  
+    const id = Number(idOrName);
+    if (Number.isNaN(id)) return "Unknown";
+  
+    const category = categories.find((cat) => Number(cat.id) === id);
+    return category ? category.name : "Unknown";
+  };
 
-    let category = categories.find((cat) => cat.id == id);
-
-    if (!category) {
-      category = categories.find((cat) => String(cat.id) === String(id));
-    }
-
-    if (!category) {
-      const numId = Number(id);
-      if (!isNaN(numId)) {
-        category = categories.find((cat) => Number(cat.id) === numId);
-      }
-    }
-
-    if (!category) {
-      console.warn(
-        `Category not found for id: ${id}. Available:`,
-        categories.map((c) => c.id)
-      );
-      return "Unknown";
-    }
-
-    return category.name;
-  }
 
   const displayTransaction = {
     ...transaction,

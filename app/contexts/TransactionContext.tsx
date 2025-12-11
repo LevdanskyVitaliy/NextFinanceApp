@@ -168,6 +168,8 @@ export function TransactionProvider({ children }: { children: ReactNode }) {
             : { field: "date", direction: "desc" },
           filters: options.filters,
         });
+        
+        console.log("getTransactions result:", result);
 
         setTableTransactions(result.data || []);
         setTableTotalPages(result.pages || 1);
@@ -186,12 +188,14 @@ export function TransactionProvider({ children }: { children: ReactNode }) {
         setTableTotalItems(0);
       } finally {
         setTableLoading(false);
+     
       }
     },
     []
   );
 
   const refreshData = async () => {
+
     await fetchAllData();
     await fetchTableData(currentTableOptions);
   };
@@ -213,10 +217,18 @@ export function TransactionProvider({ children }: { children: ReactNode }) {
       if (tableTransactions.length === 1 && currentTableOptions.page > 1) {
         const newPage = currentTableOptions.page - 1;
         const newOptions = { ...currentTableOptions, page: newPage };
+        
         fetchTableData(newOptions);
+        fetchAllData();
+       
+
       } else {
+       fetchAllData();
         fetchTableData(currentTableOptions);
+        // refreshData();
       }
+
+     
     } catch (error) {
       console.error("Error deleting transaction:", error);
       fetchTableData(currentTableOptions);

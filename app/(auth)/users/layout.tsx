@@ -8,16 +8,21 @@ export default function TransactionsLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   const { transactions, categories, loading } = useTransactions();
 
-  const getCategoryName = (categoryId: string | number): string => {
-    if (!categoryId || !categories.length) return "Uncategorized";
-    const category = categories.find(
-      (cat) =>
-        cat.id == categoryId ||
-        String(cat.id) === String(categoryId) ||
-        Number(cat.id) === Number(categoryId)
-    );
-    return category?.name || "Uncategorized";
+  const getCategoryName = (idOrName: string | number): string => {
+  
+    if (typeof idOrName === "string" && isNaN(Number(idOrName))) {
+      return idOrName || "Unknown";
+    }
+  
+    if (!categories.length) return "Unknown";
+  
+    const id = Number(idOrName);
+    if (Number.isNaN(id)) return "Unknown";
+  
+    const category = categories.find((cat) => Number(cat.id) === id);
+    return category ? category.name : "Unknown";
   };
+
 
   const formatDate = (dateString: string) => {
     try {

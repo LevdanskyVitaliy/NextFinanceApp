@@ -363,13 +363,13 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Edit, Trash, Search } from "lucide-react";
-import { SortOptions } from "../services/logic";
 import MiniSearch from "minisearch";
 
 export default function TransactionsTable() {
   const {
     categories,
     tableData,
+    refreshData,
     fetchTableData,
     deleteTransaction,
     currentTableOptions,
@@ -405,7 +405,7 @@ export default function TransactionsTable() {
     }
   }, [tableData.transactions]);
 
-  // Filter transactions based on search
+
   const filteredTransactions = useMemo(() => {
     if (!searchIndex || !searchQuery.trim()) {
       return tableData.transactions;
@@ -424,10 +424,15 @@ export default function TransactionsTable() {
       page: options.page || currentTableOptions.page,
       limit: options.limit || currentTableOptions.limit,
       sort: options.sort || currentTableOptions.sort,
-      filters: options.filters !== undefined ? options.filters : currentTableOptions.filters,
+      filters: options.filters !== undefined
+        ? options.filters
+        : currentTableOptions.filters,
     });
-  }, [fetchTableData, currentTableOptions]);
+  
+    // await refreshData(); // <-- call it
+  }, [ currentTableOptions]);
 
+  
   const handleSort = (field: string) => {
     let direction: "desc" | "asc" | null = "desc";
     if (currentTableOptions.sort?.field === field) {
@@ -441,29 +446,21 @@ export default function TransactionsTable() {
     });
   };
 
-  const getCategoryName = (id: string | number): string => {
-    if (!categories.length) {
-      return "Unknown";
+  
+
+  const getCategoryName = (idOrName: string | number): string => {
+    
+    if (typeof idOrName === "string" && isNaN(Number(idOrName))) {
+      return idOrName || "Unknown";
     }
-
-    let category = categories.find((cat) => cat.id == id);
-
-    if (!category) {
-      category = categories.find((cat) => String(cat.id) === String(id));
-    }
-
-    if (!category) {
-      const numId = Number(id);
-      if (!isNaN(numId)) {
-        category = categories.find((cat) => Number(cat.id) === numId);
-      }
-    }
-
-    if (!category) {
-      return "Unknown";
-    }
-
-    return category.name;
+  
+    if (!categories.length) return "Unknown";
+  
+    const id = Number(idOrName);
+    if (Number.isNaN(id)) return "Unknown";
+  
+    const category = categories.find((cat) => Number(cat.id) === id);
+    return category ? category.name : "Unknown";
   };
 
   const handleDelete = async (id: number) => {
@@ -497,8 +494,8 @@ export default function TransactionsTable() {
         <span className="sm:flex items-start justify-between text-md sm:text-lg lg:text-xl hidden  font-bold">
           Transactions
         </span>
-        <div className="flex items-center  gap-3 ">
-          <div className="flex items-center gap-2 sm:gap-4">
+        <div className="flex items-center  gap-2 ">
+          <div className="flex items-center gap-2 sm:gap-3">
             <select
               value={currentTableOptions.filters?.type || ""}
               onChange={(e) =>
@@ -546,9 +543,9 @@ export default function TransactionsTable() {
           </div>
 
           <div className="flex items-center">
-            <label htmlFor="pageSize" className="mr-2 text-sm">
+            {/* <label htmlFor="pageSize" className="mr-1 text-xs md:text-sm">
               Show:
-            </label>
+            </label> */}
             <select
               id="pageSize"
               value={currentTableOptions.limit}
@@ -618,11 +615,11 @@ export default function TransactionsTable() {
                 className="group hover:bg-gray-300 dark:hover:bg-gray-900 cursor-pointer gap-0"
                 onClick={() => router.push(`/users/${op.id}`)}
               >
-                <TableCell className=" text-left text-xs sm:text-sm md:text-md min-w-15 max-w-20 sm:min-w-20 sm:max-w-25 md:min-w-25 md:max-w-30">
+                <TableCell className=" text-left text-xs sm:text-sm md:text-md min-w-15 max-w-20 sm:min-w-20 sm:max-w-25 md:min-w-25 md:max-w-40">
                   {new Date(op.date).toLocaleDateString("ru-RU")}
                 </TableCell>
-                <TableCell className=" overflow-scroll text-xs sm:text-sm md:text-md min-w-15 max-w-20 sm:min-w-20 sm:max-w-25 md:min-w-25 md:max-w-30">{getCategoryName(op.category)}</TableCell>
-                <TableCell className="overflow-scroll text-xs sm:text-sm md:text-md min-w-20 max-w-25 sm:min-w-25 sm:max-w-30 md:min-w-30 md:max-w-40">
+                <TableCell className=" overflow-scroll text-xs sm:text-sm md:text-md min-w-15 max-w-20 sm:min-w-20 sm:max-w-25 md:min-w-25 md:max-w-45">{getCategoryName(op.category)}</TableCell>
+                <TableCell className="overflow-scroll text-xs sm:text-sm md:text-md min-w-20 max-w-25 sm:min-w-25 sm:max-w-30 md:min-w-30 md:max-w-45">
                   {op.description}
                 </TableCell>
                 <TableCell className="md:text-md sm:text-sm text-xs font-semibold">
@@ -630,7 +627,7 @@ export default function TransactionsTable() {
                     ? "Expence"
                     : "Income"}
                 </TableCell>
-                <TableCell className="text-left text-xs sm:text-sm md:text-md min-w-20 max-w-25 sm:min-w-25 sm:max-w-30 md:min-w-30 md:max-w-35 overflow-scroll">
+                <TableCell className="text-left text-xs sm:text-sm md:text-md min-w-20 max-w-25 sm:min-w-25 sm:max-w-30 md:min-w-30 md:max-w-40 overflow-scroll">
                   <span
                     className={
                       op.type === "expense" || op.type === "expence"
