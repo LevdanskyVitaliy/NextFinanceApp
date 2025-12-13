@@ -19,44 +19,7 @@ import { Button } from "@/components/ui/button";
 
 export default function MonthlyDiagramCard() {
   const { transactions } = useTransactions();
-
- 
-  // const monthlyData = useMemo(() => {
-
-  //   const map: Record<string, { income: number; expense: number }> = {};
-
-  //   transactions.forEach((t) => {
-  //     const date = new Date(t.date);
-  //     const monthKey = date.toLocaleDateString("en-US", {
-  //       year: "numeric",
-  //       month: "numeric",
-  //     });
-
-  //     if (!map[monthKey]) {
-  //       map[monthKey] = { income: 0, expense: 0 };
-  //     }
-
-  //     if (t.type === "income") {
-  //       map[monthKey].income += t.amount;
-  //     } else if (t.type === "expense" || t.type === "expence") {
-  //       map[monthKey].expense += t.amount;
-  //     }
-  //   });
-
-  //   // await refreshData();
-
-  //   return Object.entries(map).map(([month, values]) => ({
-  //     month,
-  //     income: Number(values.income.toFixed(2)),
-  //     expense: Number(values.expense.toFixed(2)),
-  //   }));
-
-   
-  // }, [transactions, refreshData]);
-
-  // Slider state
-  
-  
+    
   const monthlyData = useMemo(() => {
     const map: Record<string, { income: number; expense: number }> = {};
   
