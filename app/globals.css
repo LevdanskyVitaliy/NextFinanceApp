@@ -2,14 +2,14 @@
 @import "tw-animate-css";
 
 @layer utilities {
-  /* Chrome, Safari and Opera */
+ 
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
-  /* IE, Edge and Firefox */
+
   .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
   }
 }
 
@@ -121,6 +121,6 @@
   }
 
   .dark body {
-    @apply bg-[#05070a] text-white; /* тёмная тема с серым фоном */
+    @apply bg-[#05070a] text-white; 
   }
 }
