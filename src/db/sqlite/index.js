@@ -64,7 +64,7 @@ export class Sqlite {
     const params = [];
     let where = "WHERE 1=1";
 
-    // type "income" | "expense"
+   
     if (filters.type === "income") {
       where += " AND t.type = 'income'";
     } else if (filters.type === "expense") {
@@ -130,53 +130,6 @@ export class Sqlite {
     return row;
   };
 
-  // updateOne = async (id, updates) => {
-  //   // const allowedFields = ["amount", "type", "category", "description", "date"];
-  //   const setParts = [];
-  //   const params = [];
-
-  //   if (updates.amount !== undefined) {
-  //     setParts.push("amount = ?");
-  //     params.push(updates.amount);
-  //   }
-  //   if (updates.type !== undefined) {
-  //     setParts.push("type = ?");
-  //     params.push(updates.type);
-  //   }
-  //   if (updates.category !== undefined || updates.category !== undefined) {
-  //     const categoryId =
-  //       updates.category !== undefined ? updates.category : updates.category;
-  //     setParts.push("category = ?");
-  //     params.push(categoryId ?? null);
-  //   }
-  //   if (updates.description !== undefined) {
-  //     setParts.push("description = ?");
-  //     params.push(updates.description);
-  //   }
-  //   if (updates.date !== undefined) {
-  //     setParts.push("date = ?");
-  //     params.push(updates.date);
-  //   }
-
-  //   if (setParts.length === 0) {
-  //     return await this.getById(id);
-  //   }
-
-  //   params.push(id);
-
-  //   const row = await this.#db.get(
-  //     `
-  //     UPDATE transactions
-  //     SET ${setParts.join(", ")}
-  //     WHERE id = ?
-  //     RETURNING *
-  //     `,
-  //     params
-  //   );
-
-  //   return row || null;
-  // };
-
   updateOne = async (id, updates) => {
     const setParts = [];
     const params = [];
@@ -191,9 +144,9 @@ export class Sqlite {
       params.push(updates.type);
     }
 
-    // category is the foreign key column
+   
     if (updates.category !== undefined) {
-      // expect updates.category to be a category id (number or numeric string)
+     
       const categoryId =
         updates.category === null || updates.category === ""
           ? null
@@ -213,7 +166,6 @@ export class Sqlite {
       params.push(updates.date);
     }
 
-    // nothing to update
     if (setParts.length === 0) {
       return await this.getById(id);
     }
